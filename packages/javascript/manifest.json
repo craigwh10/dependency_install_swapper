@@ -1,0 +1,9 @@
+{
+    "name": "dependency_install_swapper_js",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Swap npm & yarn install links interchangeably",
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+}
