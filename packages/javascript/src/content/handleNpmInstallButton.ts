@@ -20,20 +20,28 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
 
     const [ prefix, _install, packageName ] = npmInstallText.trim().split(' ');
     
-    contentLogger('warn', JSON.stringify({prefix, _install, packageName}));
+    contentLogger('info', JSON.stringify({prefix, _install, packageName}));
 
-    if (preferredPackageManager === 'yarn' && prefix === 'npm') {
+    if (!['yarn', 'npm', 'pnpm'].includes(prefix)) {
+        contentLogger('warn', `unknown install prefix: ${prefix}`)
+        return;
+    }
+
+    if (preferredPackageManager === 'yarn') {
         installButton.textContent = `yarn add ${packageName}`;
 
         return;
     }
 
-    if (preferredPackageManager === 'npm' && prefix === 'yarn') {
+    if (preferredPackageManager === 'npm') {
         installButton.textContent = `npm i ${packageName}`;
 
         return;
     }
 
-    contentLogger('warn', 'unknown install prefix')
-    return;
+    if (preferredPackageManager === 'pnpm') {
+        installButton.textContent = `pnpm add ${packageName}`;
+
+        return;
+    }
 }

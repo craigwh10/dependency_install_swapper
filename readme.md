@@ -9,6 +9,7 @@ Work in progress.
 ## Milestones
 
 - [x] Converting npm to yarn commands in npm website.
+- [x] Adding pnpm support.
 - [x] Controlled via a toggle on the popup.
 - [x] Improve styling of the popup
 
