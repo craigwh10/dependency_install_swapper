@@ -1,16 +1,84 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>npm dis</title>
+        <title>Dependency Install Swapper</title>
     </head>
     <body>
-        <label name="preferred-package-manager">
-            Choose preferred package manager.
-        </label>
-        <select name="preferred-package-manager">
-            <option value="yarn">Yarn</option>
-            <option value="npm">NPM</option>
-        </select>
+        <div id="container">
+            <header>
+                <h2>Dependency install swapper</h2>
+            </header>
+            <main>
+                <label name="preferred-package-manager">
+                    On npmjs.com I want the download to show using
+                </label>
+                <select name="preferred-package-manager">
+                    <option value="yarn">Yarn</option>
+                    <option value="npm">NPM</option>
+                </select>
+            </main>
+            <footer>
+                <ul>
+                    <li>
+                        <a href="https://craigwh.it" target="_blank">Made by craigwh.it</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/craigwh10/dependency_install_swapper" target="_blank">Wanna improve this?</a>
+                    </li>
+                    <li>
+                        <a href="https://npmjs.com" target="_blank">npmjs.com</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
         <script src="./src/popup.ts" type="module"></script>
+        <style>
+            body {
+                border: 1px solid lightgray;
+                margin: 0px;
+            }
+
+            h2, label {
+                margin-block-start: 0;;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+            }
+
+            h2 {
+                font-weight: 700;
+                font-size: 18px;
+                padding: 1em 0em 0em 0.65em;
+            }
+
+            main {
+                padding: 0em 1em 1.5em 1em;
+            }
+
+            #container {
+                width: 350px;
+            }
+
+            #container label {
+                padding-bottom: 1em;
+                display: block;
+            }
+
+            #container select {
+                width: 100%;
+                padding: 1em;
+            }
+
+            footer {
+                border-top: 1px solid lightgray;
+            }
+
+            footer ul {
+                list-style: none;
+                padding-inline-start: 20px;
+            }
+
+            footer ul li {
+                padding-bottom: 0.2em;
+            }            
+        </style>
     </body>
 </html>
