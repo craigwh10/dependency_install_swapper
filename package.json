@@ -7,21 +7,26 @@
   "scripts": {
     "add:js": "yarn workspace javascript add",
     "run:js": "yarn workspace javascript run",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
+    "unit:js": "yarn workspace javascript test:unit"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
+    "@testing-library/dom": "^9.2.0",
+    "@types/chrome": "^0.0.228",
+    "@types/jest": "^29.5.0",
     "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "parcel": "^2.8.3",
     "parcel-plugin-typescript": "^1.0.0",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.3"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "yarn run commitmsg"
-    }
+  "engines": {
+    "node": "18"
   }
 }
