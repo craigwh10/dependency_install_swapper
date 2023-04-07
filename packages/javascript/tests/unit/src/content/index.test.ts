@@ -1,13 +1,13 @@
-import { handleNpmInstallButton } from "../../../../src/content/handleNpmInstallButton"
-import { contentLogger } from "../../../../src/utils"
-import { preferredPackageManager } from "../../../../src/storage"
+import { handleNpmInstallButton } from "@js/src/content/handleNpmInstallButton"
+import { contentLogger } from "@js/src/utils"
+import { preferredPackageManager } from "@js/src/storage"
 import { waitFor } from "@testing-library/dom";
 
-jest.mock('../../../../src/content/handleNpmInstallButton');
+jest.mock('@js/src/content/handleNpmInstallButton');
 const mockHandleNpmInstallButton = jest.mocked(handleNpmInstallButton);
-jest.mock('../../../../src/utils');
+jest.mock('@js/src/utils');
 const mockContentLogger = jest.mocked(contentLogger);
-jest.mock('../../../../src/storage');
+jest.mock('@js/src/storage');
 const mockPreferredPackageManager = jest.mocked(preferredPackageManager);
 
 describe('content script initialisation', () => {
@@ -24,7 +24,7 @@ describe('content script initialisation', () => {
 
                 mockPreferredPackageManager.get.mockResolvedValue({preferredPackageManager: 'npm'});
 
-                require('../../../../src/content/index');
+                require('@js/src/content/index');
 
                 await waitFor(() => {
                     expect(mockHandleNpmInstallButton).toBeCalledWith('npm');
@@ -40,7 +40,7 @@ describe('content script initialisation', () => {
     
                 mockPreferredPackageManager.get.mockRejectedValue(new Error('google extension store broken'));
     
-                require('../../../../src/content/index');
+                require('@js/src/content/index');
     
                 await waitFor(() => {
                     expect(mockContentLogger).toBeCalledWith('warn', 'google extension store broken')
@@ -55,7 +55,7 @@ describe('content script initialisation', () => {
                 mockChrome(mockAddEventListener);
                 mockPreferredPackageManager.get.mockResolvedValue({preferredPackageManager: 'npm'});
     
-                require('../../../../src/content/index');
+                require('@js/src/content/index');
     
                 expect(mockAddEventListener).toBeCalledTimes(1);
             })
