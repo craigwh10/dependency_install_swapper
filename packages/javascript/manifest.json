@@ -2,9 +2,9 @@
     "name": "dependency_install_swapper_js",
     "version": "1.0",
     "manifest_version": 3,
-    "description": "Swap npm & yarn install links interchangeably",
+    "description": "Swap npm & yarn install links interchangeably on npmjs.com",
     "action": {
-        "default_title": "js dis",
+        "default_title": "Dependency Install Swapper",
         "default_popup": "popup.html"
     },
     "permissions": ["activeTab", "storage"],

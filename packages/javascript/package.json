@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "parcel extension.html",
+    "start": "parcel popup.html",
     "build": "rm -rf output && parcel build src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json",
     "test:unit": "jest --config=./jest.config.js --"
   },
