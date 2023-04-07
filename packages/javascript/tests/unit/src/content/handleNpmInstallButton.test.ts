@@ -28,6 +28,12 @@ describe('content', () => {
 
             expect(document.body.textContent).toContain('yarn add cellular-automata-react')
         })
+
+        it('should set the text content as a pnpm command if that is the preferred package manager', () => {
+            handleNpmInstallButton('pnpm');
+
+            expect(document.body.textContent).toContain('pnpm add cellular-automata-react')
+        })
     })
 
     describe('given the npm install field exists on the page as an yarn command', () => {
@@ -51,6 +57,42 @@ describe('content', () => {
             handleNpmInstallButton('yarn');
 
             expect(document.body.textContent).toContain('yarn add cellular-automata-react')
+        })
+
+        it('should set the text content as a yarn command if that is the preferred package manager', () => {
+            handleNpmInstallButton('pnpm');
+
+            expect(document.body.textContent).toContain('pnpm add cellular-automata-react')
+        })
+    })
+
+    describe('given the pnpm install field exists on the page as an yarn command', () => {
+        beforeEach(() => {
+            document.body.innerHTML = `
+                <code class="flex-auto truncate db" title="Copy Command to Clipboard">
+                    <span role="button" tabindex="0" aria-label="Install, npm i cellular-automata-react">
+                        pnpm add cellular-automata-react
+                    </span>
+                </code>
+            `;
+        })
+
+        it('should set the text content as an npm command if that is the preferred package manager', () => {
+            handleNpmInstallButton('npm');
+
+            expect(document.body.textContent).toContain('npm i cellular-automata-react')
+        })
+
+        it('should set the text content as a yarn command if that is the preferred package manager', () => {
+            handleNpmInstallButton('yarn');
+
+            expect(document.body.textContent).toContain('yarn add cellular-automata-react')
+        })
+
+        it('should set the text content as a yarn command if that is the preferred package manager', () => {
+            handleNpmInstallButton('pnpm');
+
+            expect(document.body.textContent).toContain('pnpm add cellular-automata-react')
         })
     })
 
