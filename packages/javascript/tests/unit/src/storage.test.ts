@@ -1,4 +1,4 @@
-import { preferredPackageManager } from "../../../src/storage"
+import { preferredPackageManager } from "@js/src/storage"
 import { mockGlobalChromeStoreLocal } from "../../mocks/google";
 
 describe('storage', () => {

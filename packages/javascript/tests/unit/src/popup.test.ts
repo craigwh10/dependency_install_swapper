@@ -1,13 +1,13 @@
-import { preferredPackageManager } from "../../../src/storage";
-import { popupLogger } from "../../../src/utils";
+import { preferredPackageManager } from "@js/src/storage";
+import { popupLogger } from "@js/src/utils";
 
 import {
     fireEvent, getQueriesForElement, waitFor
 } from '@testing-library/dom'
 
-jest.mock('../../../src/storage');
+jest.mock('@js/src/storage');
 const mockPreferredPackageManager = jest.mocked(preferredPackageManager);
-jest.mock('../../../src/utils');
+jest.mock('@js/src/utils');
 const mockPopupLoggger = jest.mocked(popupLogger);
 
 describe('popup', () => {

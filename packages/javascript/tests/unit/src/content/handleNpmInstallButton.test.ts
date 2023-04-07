@@ -1,8 +1,8 @@
-import { handleNpmInstallButton } from "../../../../src/content/handleNpmInstallButton";
+import { handleNpmInstallButton } from "@js/src/content/handleNpmInstallButton";
 
-import { contentLogger } from "../../../../src/utils";
+import { contentLogger } from "@js/src/utils";
 
-jest.mock('../../../../src/utils');
+jest.mock('@js/src/utils');
 const mockContentLogger = jest.mocked(contentLogger);
 
 describe('content', () => {
