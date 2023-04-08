@@ -1,6 +1,6 @@
 {
     "name": "dependency_install_swapper_js",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "manifest_version": 3,
     "description": "Swap npm, yarn & pnpm install links interchangeably on npmjs.com",
     "action": {
