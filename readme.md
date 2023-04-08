@@ -9,10 +9,11 @@ Work in progress.
 ## Milestones
 
 - [x] Converting npm to yarn commands in npm website.
-- [x] Controlled via a toggle on popup.
-- [ ] Improve style of popup
+- [x] Adding pnpm support.
+- [x] Controlled via a toggle on the popup.
+- [x] Improve styling of the popup
 
 ## Tech tasks
 
-- [ ] Path aliases with parcel and tsc
+- [x] Path aliases with parcel and tsc
 - [ ] Linting

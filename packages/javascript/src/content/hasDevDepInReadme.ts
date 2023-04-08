@@ -1,5 +1,3 @@
-import { availablePackageManagers } from "../storage";
-
 export function hasDevDepInReadme (packageOfInterest: string) {
     const readme = document.querySelector('article');
 

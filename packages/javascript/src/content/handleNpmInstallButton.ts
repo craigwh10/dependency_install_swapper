@@ -19,30 +19,59 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
 
     contentLogger('info', `content on page: ${npmInstallText.trim()}`)
 
-    const [ prefix, _install, packageName ] = npmInstallText.trim().split(' ');
-    
-    contentLogger('warn', JSON.stringify({prefix, _install, packageName}));
+    // npm i -D packagename
+    // npm i packagename
+    const [
+        prefix,
+        _install,
+        // -D or packagename
+        packageNameOrDevDep,
+        // packagename or nothing
+        packageNameOrNull
+    ] = npmInstallText.trim().split(' ') as [
+        string,
+        string,
+        string,
+        string | null
+    ];
 
-    if (preferredPackageManager === 'yarn' && prefix === 'npm') {
-        if (hasDevDepInReadme(packageName)) {
-            installButton.textContent = `yarn add -D ${packageName}`;
-        } 
+    contentLogger('info', JSON.stringify({prefix, _install, packageNameOrDevDep, packageNameOrNull}));
 
-        installButton.textContent = `yarn add ${packageName}`;
-
+    if (!['yarn', 'npm', 'pnpm'].includes(prefix)) {
+        contentLogger('warn', `unknown install prefix: ${prefix}`)
         return;
     }
 
-    if (preferredPackageManager === 'npm' && prefix === 'yarn') {
-        if (hasDevDepInReadme(packageName)) {
-            installButton.textContent = `npm add -D ${packageName}`;
-        } 
+    switch (preferredPackageManager) {
+        case 'yarn':
+            handleReplaceText(installButton, packageNameOrDevDep, packageNameOrNull, 'yarn add');
+            return;
+        case 'npm':
+            handleReplaceText(installButton, packageNameOrDevDep, packageNameOrNull, 'npm i');
+            return;
+        case "pnpm":
+            handleReplaceText(installButton, packageNameOrDevDep, packageNameOrNull, 'pnpm add');
+            return;
+        default:
+            return;
+        }
+}
 
-        installButton.textContent = `npm i ${packageName}`;
+function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
 
+    // hasn't been transformed - yarn add x
+    const IS_NON_DEV_DEP_CMD = hasDevDepInReadme(packageNameOrDevDep) && !packageNameOrNull; 
+    if (IS_NON_DEV_DEP_CMD) {
+        installButton.textContent = `${cmdPrefix} -D ${packageNameOrDevDep}`;
         return;
     }
 
-    contentLogger('warn', 'unknown install prefix')
-    return;
+    // has been transformed - yarn add -D x
+    const IS_DEV_DEP_CMD = packageNameOrNull && hasDevDepInReadme(packageNameOrNull);
+    if (IS_DEV_DEP_CMD) {
+        installButton.textContent = `${cmdPrefix} -D ${packageNameOrNull}`;
+        return;
+    } 
+
+    installButton.textContent = `${cmdPrefix} ${packageNameOrDevDep}`;
 }
