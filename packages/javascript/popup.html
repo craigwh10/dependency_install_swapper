@@ -5,35 +5,65 @@
     </head>
     <body>
         <div id="container">
-            <header>
-                <h2>Dependency install swapper</h2>
+            <header class="px-g py-t">
+                <h2>Dependency Install Swapper</h2>
             </header>
-            <main>
-                <label name="preferred-package-manager">
-                    On npmjs.com I want the download to show using
+            <main class="px-g py-b">
+                <label name="preferred-package-manager" class="py-b">
+                    My preferred npmjs.com package manager:
                 </label>
                 <select name="preferred-package-manager" autocomplete="off">
                     <option value="yarn">Yarn</option>
                     <option value="npm" selected="selected">NPM</option>
                     <option value="pnpm">PNPM</option>
+                    <option value="bower">Bower</option>
                 </select>
             </main>
             <footer>
-                <ul>
-                    <li>
-                        <a href="https://craigwh.it" target="_blank">Made by craigwh.it</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/craigwh10/dependency_install_swapper" target="_blank">Wanna improve this?</a>
-                    </li>
-                    <li>
-                        <a href="https://npmjs.com" target="_blank">npmjs.com</a>
-                    </li>
-                </ul>
+                <div class="flex flex-row align-center px-g py-t py-b">
+                    <div>
+                        <a href="https://github.com/yourusername/craigwh10/issues" target="_blank">
+                            <img src="https://img.shields.io/github/issues/craigwh10/dependency_install_swapper?style=social" alt="GitHub issues">
+                        </a>
+                        <a href="https://github.com/craigwh10/dependency_install_swapper?star=true" target="_blank">
+                            <img src="https://img.shields.io/github/stars/craigwh10/dependency_install_swapper?style=social" alt="GitHub stars">
+                        </a>
+                    </div>
+                    <div class="ml-auto">
+                        <a href="https://craigwh.it" target="_blank">
+                            <img src="https://img.shields.io/badge/Made%20by-craigwh.it-blue?style=flat-square" alt="Made by craigwh.it">
+                        </a>
+                    </div>
+                </div>
             </footer>
         </div>
         <script src="./src/popup.ts" type="module"></script>
         <style>
+            /* Globals */
+            .flex {
+                display: flex;
+            }
+
+            .flex-row {
+                flex-direction: row;
+            }
+            .align-center {
+                align-items: center;
+            }
+            .px-g {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .py-b {
+                padding-bottom: 16px;
+            }
+            .py-t {
+                padding-top: 16px;
+            }
+            .ml-auto {
+                margin-left: auto;
+            }
+            /* Rest */
             body {
                 border: 1px solid lightgray;
                 margin: 0px;
@@ -47,20 +77,18 @@
             h2 {
                 font-weight: 700;
                 font-size: 18px;
-                padding: 1em 0em 0em 0.65em;
             }
 
-            main {
-                padding: 0em 1em 1.5em 1em;
-            }
+            /* main {} */
 
             #container {
                 width: 350px;
             }
 
             #container label {
-                padding-bottom: 1em;
                 display: block;
+                font-size: 13px;
+                color: gray;
             }
 
             #container select {
