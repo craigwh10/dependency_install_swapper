@@ -10,10 +10,25 @@ Lightweight google chrome extension which changes the install field in npmjs.com
 
 ## Notes
 
+### Running locally
+
 ```sh
 $ yarn
 $ yarn run:js start
 ```
+
+### Running in "production"
+
+```sh
+$ yarn
+$ yarn run:js build
+```
+
+Then:
+
+- Go to `chrome://extensions`
+- Load unpacked pointing at `packages/javascript/output`
+- Then you should see the extension
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
 
@@ -25,6 +40,7 @@ $ yarn run:js start
 - [x] Improve styling of the popup
 - [x] Infer dev dependencies based on existence of command in readme
   - [x] With warning on missing readme detail
+- [x] Added bower support
 
 ## Tech tasks
 
