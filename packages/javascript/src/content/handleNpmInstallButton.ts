@@ -92,10 +92,10 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
 
     // No readme reference so warn user about the
     // fact this could be a developer dependency.
-    if (!hasDevDepInReadme(packageNameOrDevDep)) {
+    if (!hasDevDepInReadme(packageNameOrDevDep) && !document.querySelector('#dis-google-ext-warning')) {
         installButton!.parentElement!.parentElement!.insertAdjacentHTML(
             'afterend',
-            '<div style="color: #886701; background: #fff5db; padding: 16px; border: 1px solid #886701; border-radius: 5px;"><b>Warning:</b><br><br/>No example install commands found in readme.<br/><br/>So this could potentially be a development dependency.</div>'
+            '<div id="dis-google-ext-warning" style="color: #886701; background: #fff5db; padding: 16px; border: 1px solid #886701; border-radius: 5px;"><b>Warning:</b><br><br/>No example install commands found in readme.<br/><br/>So this could potentially be a development dependency.</div>'
         )
     }
 
