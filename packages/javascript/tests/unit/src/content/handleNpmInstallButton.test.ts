@@ -14,13 +14,19 @@ describe('content', () => {
         it.each([
             // yarn
             ...testCaseGroup('yarn add cellular-automata-react', false),
+            ...testCaseGroup('yarn add cellular-automata-react', true),
             ...testCaseGroup('yarn add -D cellular-automata-react', true),
+            ...testCaseGroup('yarn add -D cellular-automata-react', false),
             // npm
             ...testCaseGroup('npm i cellular-automata-react', false),
+            ...testCaseGroup('npm i cellular-automata-react', true),
             ...testCaseGroup('npm i -D cellular-automata-react', true),
+            ...testCaseGroup('npm i -D cellular-automata-react', false),
             // pnpm
             ...testCaseGroup('pnpm add cellular-automata-react', false),
+            ...testCaseGroup('pnpm add cellular-automata-react', true),
             ...testCaseGroup('pnpm add -D cellular-automata-react', true),
+            ...testCaseGroup('pnpm add -D cellular-automata-react', false),
         ])('for $initialCmd with pkg manager $preferredPkgManager it should return $expectedResultingTextContent', ({
             initialCmd,
             preferredPkgManager,

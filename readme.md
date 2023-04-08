@@ -12,6 +12,7 @@ Work in progress.
 - [x] Adding pnpm support.
 - [x] Controlled via a toggle on the popup.
 - [x] Improve styling of the popup
+- [x] Infer dev dependencies based on existence of command in readme
 
 ## Tech tasks
 

@@ -35,7 +35,12 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
         string | null
     ];
 
-    contentLogger('info', JSON.stringify({prefix, _install, packageNameOrDevDep, packageNameOrNull}));
+    contentLogger('info', JSON.stringify({
+        prefix,
+        _install,
+        packageNameOrDevDep,
+        packageNameOrNull: packageNameOrNull ? packageNameOrNull : ''
+    }));
 
     if (!['yarn', 'npm', 'pnpm'].includes(prefix)) {
         contentLogger('warn', `unknown install prefix: ${prefix}`)
@@ -58,20 +63,35 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
 }
 
 function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
+    contentLogger('info', `trying to replace text for ${JSON.stringify({readMeHasDevDep: hasDevDepInReadme(packageNameOrDevDep),packageNameOrDevDep, packageNameOrNull, cmdPrefix})}`)
 
-    // hasn't been transformed - yarn add x
+    // hasn't been transformed - yarn add x, need to be dev dep.
     const IS_NON_DEV_DEP_CMD = hasDevDepInReadme(packageNameOrDevDep) && !packageNameOrNull; 
     if (IS_NON_DEV_DEP_CMD) {
+        contentLogger('info', `hasn't been transformed - e.g yarn add x, transforming to dev dep`)
+
         installButton.textContent = `${cmdPrefix} -D ${packageNameOrDevDep}`;
         return;
     }
 
-    // has been transformed - yarn add -D x
-    const IS_DEV_DEP_CMD = packageNameOrNull && hasDevDepInReadme(packageNameOrNull);
-    if (IS_DEV_DEP_CMD) {
+    // has been transformed - yarn add -D x, and needs to be dev dep.
+    if (packageNameOrNull && hasDevDepInReadme(packageNameOrNull)) {
+        contentLogger('info', `has previously been transformed - e.g yarn add -D x, keeping as dev dep`)
+
         installButton.textContent = `${cmdPrefix} -D ${packageNameOrNull}`;
         return;
     } 
 
+    // has been transformed - yarn add -D x, and no longer needs dev dep.
+    if (packageNameOrNull && !hasDevDepInReadme(packageNameOrNull)) {
+        contentLogger('info', `has previously been transformed - e.g yarn add -D x, removing dev dep`)
+
+        installButton.textContent = `${cmdPrefix} ${packageNameOrNull}`;
+        return;
+    }
+
+
+    contentLogger('info', `has not been transformed, and doesn't need to be a dev dep.`)
+    // has not been transformed, and doesn't need to be a dev dep.
     installButton.textContent = `${cmdPrefix} ${packageNameOrDevDep}`;
 }
