@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel extension.html",
     "build": "rm -rf output && parcel build src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json",
-    "test:unit": "jest --config=./jest.config.js --"
+    "test:unit": "jest --config=./jest.config.js"
   },
   "targets": {
     "default": {
