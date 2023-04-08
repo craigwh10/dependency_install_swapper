@@ -42,7 +42,7 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
         packageNameOrNull: packageNameOrNull ? packageNameOrNull : ''
     }));
 
-    if (!['yarn', 'npm', 'pnpm'].includes(prefix)) {
+    if (!['yarn', 'npm', 'pnpm', 'bower'].includes(prefix)) {
         contentLogger('warn', `unknown install prefix: ${prefix}`)
         return;
     }
@@ -57,6 +57,9 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
         case "pnpm":
             handleReplaceText(installButton, packageNameOrDevDep, packageNameOrNull, 'pnpm add');
             return;
+        case "bower":
+            handleReplaceText(installButton, packageNameOrDevDep, packageNameOrNull, 'bower install');
+            return;
         default:
             return;
         }
@@ -64,6 +67,31 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
 
 function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
     contentLogger('info', `trying to replace text for ${JSON.stringify({readMeHasDevDep: hasDevDepInReadme(packageNameOrDevDep),packageNameOrDevDep, packageNameOrNull, cmdPrefix})}`)
+
+    /**
+     * @note
+     * Bower does not have dev dependencies.
+     * --
+     * Hence the logic here.
+     */
+    if (cmdPrefix === 'bower install') {
+        const warning = document.querySelector('#dis-google-ext-warning')
+        if (warning) {
+            contentLogger('info', `warning found from prior transform, removing potential dev dep warning from ui`)
+            warning.remove();
+        }
+
+        if (packageNameOrNull) {
+            contentLogger('info', `was previously a dev dependency install so using 4th parameter`)
+
+            installButton.textContent = `${cmdPrefix} ${packageNameOrNull}`;
+            return;
+        }
+
+        contentLogger('info', `was previously a regular dependency install so using 3rd parameter`)
+        installButton.textContent = `${cmdPrefix} ${packageNameOrDevDep}`;
+        return;
+    }
 
     // hasn't been transformed - yarn add x, need to be dev dep.
     const IS_NON_DEV_DEP_CMD = hasDevDepInReadme(packageNameOrDevDep) && !packageNameOrNull; 

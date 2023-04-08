@@ -1,6 +1,6 @@
 import { preferenceKey } from "./constants"
 
-export type availablePackageManagers = 'npm' | 'yarn' | 'pnpm';
+export type availablePackageManagers = 'npm' | 'yarn' | 'pnpm' | 'bower';
 
 export const preferredPackageManager = {
     get: async (): Promise<{ preferredPackageManager: availablePackageManagers}> => {
