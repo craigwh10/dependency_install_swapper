@@ -10,6 +10,28 @@ jest.mock('@js/src/content/hasDevDepInReadme');
 const mockHasDevDepInReadme = jest.mocked(hasDevDepInReadme);
 
 describe('content', () => {
+    describe('given the install field exists and there is no reference of dev dep in readme', () => {
+        it('should show a warning that this could still be a dev dependency', () => {
+            mockHasDevDepInReadme.mockReturnValue(false);
+
+            document.body.innerHTML = `
+                <div>
+                    <div>
+                        <code class="flex-auto truncate db" title="Copy Command to Clipboard">
+                            <span role="button" tabindex="0" aria-label="Install, yarn add test">
+                                yarn add test
+                            </span>
+                        </code>
+                    </div>
+                </div>
+            `;
+
+            handleNpmInstallButton('yarn');
+
+            expect(document.body.textContent).toContain('yarn add test');
+            expect(document.body.querySelector('b')?.textContent).toContain('Warning:');
+        })
+    })
     describe('given the install field exists with varying package managers', () => {
         it.each([
             // yarn
@@ -47,6 +69,7 @@ describe('content', () => {
             expect(document.body.textContent).toContain(expectedResultingTextContent)
         })
     })
+
 
     describe('given the npm install does not exist on the page', () => {
         beforeEach(() => {

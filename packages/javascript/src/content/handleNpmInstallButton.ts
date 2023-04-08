@@ -90,8 +90,17 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
         return;
     }
 
+    // No readme reference so warn user about the
+    // fact this could be a developer dependency.
+    if (!hasDevDepInReadme(packageNameOrDevDep)) {
+        installButton!.parentElement!.parentElement!.insertAdjacentHTML(
+            'afterend',
+            '<div style="color: #886701; background: #fff5db; padding: 16px; border: 1px solid #886701; border-radius: 5px;"><b>Warning:</b><br><br/>No example install commands found in readme.<br/><br/>So this could potentially be a development dependency.</div>'
+        )
+    }
+
 
     contentLogger('info', `has not been transformed, and doesn't need to be a dev dep.`)
     // has not been transformed, and doesn't need to be a dev dep.
     installButton.textContent = `${cmdPrefix} ${packageNameOrDevDep}`;
-}
+};
