@@ -6,9 +6,15 @@ Lightweight google chrome extension which changes the install field in npmjs.com
 
 ## Want to raise a bug or suggestion?
 
-- [Use this form](https://github.com/craigwh10/dependency_install_swapper/issues/new)
+Please be patient with these and add as much detail as you can, for bugs add the wrong behavior and the proper behavior in a BDD structure if possible.
 
-## Notes
+Suggestions are also appreciated heavily and please again give good detail with these, also feel free to raise pull requests.
+
+- [Use this form for raising bugs/suggestions](https://github.com/craigwh10/dependency_install_swapper/issues/new)
+
+## Development information
+
+This section contains detail on how you run this application locally, as well as how you get it to show as an extension in your browser and interface with npmjs.com pages.
 
 ### Running locally
 
@@ -24,11 +30,13 @@ $ yarn
 $ yarn run:js build
 ```
 
-Then:
+Then once the `output` directory is generated:
 
 - Go to `chrome://extensions`
 - Load unpacked pointing at `packages/javascript/output`
 - Then you should see the extension
+
+### Notes
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
 
