@@ -2,6 +2,13 @@
 
 Lightweight google chrome extension which changes the install field in npmjs.com to your preferred package manager.
 
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=security_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=code_smells)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=bugs)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+
 ![example](./docs/assets/example.png)
 
 ## Want to raise a bug or suggestion?
@@ -10,7 +17,8 @@ Please be patient with these and add as much detail as you can, for bugs add the
 
 Suggestions are also appreciated heavily and please again give good detail with these, also feel free to raise pull requests.
 
-- [Use this form for raising bugs/suggestions](https://github.com/craigwh10/dependency_install_swapper/issues/new)
+- [Use this form for raising bugs](https://github.com/craigwh10/dependency_install_swapper/issues/new)
+- [Use this site for feature requests](https://dependency-install-swapper.canny.io/feature-requests)
 
 ## Development information
 
