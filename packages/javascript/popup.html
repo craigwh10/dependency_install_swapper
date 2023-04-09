@@ -1,36 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Dependency Install Swapper</title>
     </head>
     <body>
         <div id="container">
             <header class="px-g py-t">
-                <h2>Dependency Install Swapper</h2>
+                <h1>Dependency Install Swapper</h1>
             </header>
             <main class="px-g py-b">
                 <label name="preferred-package-manager" class="py-b">
                     My preferred npmjs.com package manager:
                 </label>
-                <select name="preferred-package-manager" autocomplete="off">
-                    <option value="yarn">Yarn</option>
-                    <option value="npm" selected="selected">NPM</option>
-                    <option value="pnpm">PNPM</option>
-                    <option value="bower">Bower</option>
+                <select
+                    name="preferred-package-manager"
+                    autocomplete="off"
+                    aria-label="select your preferred package manager"
+                    title="select your preferred package manager"
+                >
+                    <option
+                        value="yarn"
+                        aria-describedby="select your preferred package manager as yarn"
+                    >
+                        Yarn
+                    </option>
+                    <option
+                        value="npm"
+                        selected="selected"
+                        aria-describedby="select your preferred package manager as npm"    
+                    >
+                        NPM
+                    </option>
+                    <option
+                        value="pnpm"
+                        aria-describedby="select your preferred package manager as pnpm"   
+                    >
+                        PNPM
+                    </option>
+                    <option
+                        value="bower"
+                        aria-describedby="select your preferred package manager as bower"
+                    >
+                        Bower
+                    </option>
                 </select>
             </main>
             <footer>
                 <div class="flex flex-row align-center px-g py-t py-b">
                     <div>
-                        <a href="https://github.com/yourusername/craigwh10/issues" target="_blank">
+                        <a
+                            aria-label="navigates you to a page to raise an issue or suggestion for this extension"
+                            href="https://github.com/yourusername/craigwh10/issues"
+                            target="_blank"
+                        >
                             <img src="https://img.shields.io/github/issues/craigwh10/dependency_install_swapper?style=social" alt="GitHub issues">
                         </a>
-                        <a href="https://github.com/craigwh10/dependency_install_swapper?star=true" target="_blank">
+                        <a
+                            aria-label="navigates you to a page to leave a star if you enjoy this extension"
+                            href="https://github.com/craigwh10/dependency_install_swapper?star=true"
+                            target="_blank"
+                        >
                             <img src="https://img.shields.io/github/stars/craigwh10/dependency_install_swapper?style=social" alt="GitHub stars">
                         </a>
                     </div>
                     <div class="ml-auto">
-                        <a href="https://craigwh.it" target="_blank">
+                        <a
+                            href="https://craigwh.it"
+                            target="_blank"
+                            aria-label="navigates you to the website of the person that made this extension"
+                        >
                             <img src="https://img.shields.io/badge/Made%20by-craigwh.it-blue?style=flat-square" alt="Made by craigwh.it">
                         </a>
                     </div>
@@ -69,12 +107,12 @@
                 margin: 0px;
             }
 
-            h2, label {
+            h1, label {
                 margin-block-start: 0;;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
             }
 
-            h2 {
+            h1 {
                 font-weight: 700;
                 font-size: 18px;
             }
@@ -88,7 +126,7 @@
             #container label {
                 display: block;
                 font-size: 13px;
-                color: gray;
+                color: #323a45;
             }
 
             #container select {
