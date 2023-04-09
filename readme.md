@@ -39,6 +39,7 @@ Then once the `output` directory is generated:
 ### Notes
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
+- For current active requirements see [scenarios.md](./docs/scenarios.md) (used for manual test due to beyond unit test issues)
 
 ## Milestones
 
