@@ -1,6 +1,6 @@
 import { availablePackageManagers } from "../storage";
 import { contentLogger } from "../utils";
-import { hasDevDepInReadme } from "./hasDevDepInReadme";
+import { hasInstallCommandsInReadme } from "./hasInstallCommandsInReadme";
 
 export function handleNpmInstallButton (preferredPackageManager: availablePackageManagers) {
     const installButton = document.querySelector('span[role="button"]');
@@ -66,7 +66,7 @@ export function handleNpmInstallButton (preferredPackageManager: availablePackag
 }
 
 function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
-    contentLogger('info', `trying to replace text for ${JSON.stringify({readMeHasDevDep: hasDevDepInReadme(packageNameOrDevDep),packageNameOrDevDep, packageNameOrNull, cmdPrefix})}`)
+    contentLogger('info', `trying to replace text for npm readme`)
 
     /**
      * @note
@@ -94,7 +94,7 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
     }
 
     // hasn't been transformed - yarn add x, need to be dev dep.
-    const IS_NON_DEV_DEP_CMD = hasDevDepInReadme(packageNameOrDevDep) && !packageNameOrNull; 
+    const IS_NON_DEV_DEP_CMD = hasInstallCommandsInReadme(packageNameOrDevDep, true) && !packageNameOrNull; 
     if (IS_NON_DEV_DEP_CMD) {
         contentLogger('info', `hasn't been transformed - e.g yarn add x, transforming to dev dep`)
 
@@ -103,7 +103,7 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
     }
 
     // has been transformed - yarn add -D x, and needs to be dev dep.
-    if (packageNameOrNull && hasDevDepInReadme(packageNameOrNull)) {
+    if (packageNameOrNull && hasInstallCommandsInReadme(packageNameOrNull, true)) {
         contentLogger('info', `has previously been transformed - e.g yarn add -D x, keeping as dev dep`)
 
         installButton.textContent = `${cmdPrefix} -D ${packageNameOrNull}`;
@@ -111,7 +111,7 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
     } 
 
     // has been transformed - yarn add -D x, and no longer needs dev dep.
-    if (packageNameOrNull && !hasDevDepInReadme(packageNameOrNull)) {
+    if (packageNameOrNull && !hasInstallCommandsInReadme(packageNameOrNull, true)) {
         contentLogger('info', `has previously been transformed - e.g yarn add -D x, removing dev dep`)
 
         installButton.textContent = `${cmdPrefix} ${packageNameOrNull}`;
@@ -120,7 +120,7 @@ function handleReplaceText (installButton: Element, packageNameOrDevDep: string,
 
     // No readme reference so warn user about the
     // fact this could be a developer dependency.
-    if (!hasDevDepInReadme(packageNameOrDevDep) && !document.querySelector('#dis-google-ext-warning')) {
+    if (!hasInstallCommandsInReadme(packageNameOrDevDep, true) && !hasInstallCommandsInReadme(packageNameOrDevDep, false) && !document.querySelector('#dis-google-ext-warning')) {
         installButton!.parentElement!.parentElement!.insertAdjacentHTML(
             'afterend',
             '<div id="dis-google-ext-warning" style="color: #886701; background: #fff5db; padding: 16px; border: 1px solid #886701; border-radius: 5px;"><b>Warning:</b><br><br/>No example install commands found in readme.<br/><br/>So this could potentially be a development dependency.</div>'
