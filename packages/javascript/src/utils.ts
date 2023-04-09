@@ -1,5 +1,7 @@
 const logger = (scope: 'popup' | 'content') => (level: 'info' | 'warn', message: string) => {
-    ['test', 'development'].includes(process.env.NODE_ENV as string) ? console.log(`[${level}] ${scope} - ${message}`) : null;
+    if (typeof process.env.NODE_ENV === 'string' && ['test', 'development'].includes(process.env.NODE_ENV)) {
+        console.log(`[${level}] ${scope} - ${message}`);
+    }
 }
 
 export const popupLogger = logger('popup');
