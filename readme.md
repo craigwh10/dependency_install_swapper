@@ -51,6 +51,8 @@ Then once the `output` directory is generated:
   - [x] With warning on missing readme detail
   - [x] No warning if readme contains regular install
 - [x] Added bower support
+- [ ] Ensure popup meets accessibility criteria
+- [ ] Removing logs from deploy
 
 ## Tech tasks
 
