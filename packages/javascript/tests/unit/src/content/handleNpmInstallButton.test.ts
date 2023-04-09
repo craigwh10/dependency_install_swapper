@@ -1,18 +1,18 @@
 import { handleNpmInstallButton } from "@js/src/content/handleNpmInstallButton";
-import { hasDevDepInReadme } from "@js/src/content/hasDevDepInReadme";
+import { hasInstallCommandsInReadme } from "@js/src/content/hasInstallCommandsInReadme";
 import { availablePackageManagers } from "@js/src/storage";
 
 import { contentLogger } from "@js/src/utils";
 
 jest.mock('@js/src/utils');
 const mockContentLogger = jest.mocked(contentLogger);
-jest.mock('@js/src/content/hasDevDepInReadme');
-const mockHasDevDepInReadme = jest.mocked(hasDevDepInReadme);
+jest.mock('@js/src/content/hasInstallCommandsInReadme');
+const mockHasInstallCommandsInReadme = jest.mocked(hasInstallCommandsInReadme);
 
 describe('content', () => {
     describe('given the install field exists and there is no reference of dev dep in readme', () => {
         it('should show a warning that this could still be a dev dependency', () => {
-            mockHasDevDepInReadme.mockReturnValue(false);
+            mockHasInstallCommandsInReadme.mockReturnValue(false);
 
             document.body.innerHTML = `
                 <div>
@@ -31,6 +31,28 @@ describe('content', () => {
             expect(document.body.textContent).toContain('yarn add test');
             expect(document.body.querySelector('b')?.textContent).toContain('Warning:');
             expect(document.body.querySelectorAll('#dis-google-ext-warning')).toHaveLength(1);
+        })
+        it('should not show a warning if readme does not contain a reference to a regular install command for package', () => {
+            mockHasInstallCommandsInReadme
+            .mockReturnValueOnce(false) // check for dev command false
+            .mockReturnValueOnce(true); // check for regular command true
+
+            document.body.innerHTML = `
+                <div>
+                    <div>
+                        <code class="flex-auto truncate db" title="Copy Command to Clipboard">
+                            <span role="button" tabindex="0" aria-label="Install, yarn add test">
+                                yarn add test
+                            </span>
+                        </code>
+                    </div>
+                </div>
+            `;
+
+            handleNpmInstallButton('yarn');
+
+            expect(document.body.textContent).toContain('yarn add test');
+            expect(document.body.querySelectorAll('#dis-google-ext-warning')).toHaveLength(0);
         })
         it('if the warning already exists dont add it again', () => {
             document.body.innerHTML = `
@@ -79,7 +101,7 @@ describe('content', () => {
             expectedResultingTextContent,
             hasDevDep
         }) => {
-            mockHasDevDepInReadme.mockReturnValue(hasDevDep);
+            mockHasInstallCommandsInReadme.mockReturnValue(hasDevDep);
             document.body.innerHTML = `
                 <code class="flex-auto truncate db" title="Copy Command to Clipboard">
                     <span role="button" tabindex="0" aria-label="Install, ${initialCmd}">
@@ -108,7 +130,7 @@ describe('content', () => {
             </div>
         `;
             
-            mockHasDevDepInReadme.mockReturnValue(true);
+            mockHasInstallCommandsInReadme.mockReturnValue(true);
 
             handleNpmInstallButton('bower');
 
@@ -131,7 +153,7 @@ describe('content', () => {
             </div>
         `;
             
-            mockHasDevDepInReadme.mockReturnValue(true);
+            mockHasInstallCommandsInReadme.mockReturnValue(true);
 
             handleNpmInstallButton('bower');
 

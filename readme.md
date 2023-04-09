@@ -39,6 +39,7 @@ Then once the `output` directory is generated:
 ### Notes
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
+- For current active requirements see [scenarios.md](./docs/scenarios.md) (used for manual test due to beyond unit test issues)
 
 ## Milestones
 
@@ -48,11 +49,15 @@ Then once the `output` directory is generated:
 - [x] Improve styling of the popup
 - [x] Infer dev dependencies based on existence of command in readme
   - [x] With warning on missing readme detail
+  - [x] No warning if readme contains regular install
 - [x] Added bower support
+- [ ] Ensure popup meets accessibility criteria
+- [ ] Removing logs from deploy
 
 ## Tech tasks
 
 - [x] Path aliases with parcel and tsc
 - [ ] Linting
 - [ ] Publishing with semver and generating distribution zips
-- [ ] Cypress E2E coverage
+- [ ] Automated compatibility coverage
+  - [ ] Requires help, tried puppeteer, cypress & playwright without much success with regards to testing extensions on manifest v3 appropriately.

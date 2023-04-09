@@ -1174,4 +1174,32 @@ gulp</pre></div>
 <h2>
 <a id="user-content-visual-studio-code" class="anchor" href="#visual-studio-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Visual Studio Code</h2>
 <p>Create a new Node.js debug configuration, add <code>-r ts-node/register</code> to node args and move the <code>program</code> to the <code>args</code> list (so VS Code doesn't look for <code>outFiles</code>).</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-kos">{</span>
+    <span class="pl-s">"configurations"</span>: <span class="pl-kos">[</span><span class="pl-kos">{</span>
+        <span class="pl-s">"type"</span>: <span class="pl-s">"node"</span><span class="pl-kos">,</span>
+        <span class="pl-s">"request"</span>: <span class="pl-s">"launch"</span><span class="pl-kos">,</span>
+        <span class="pl-s">"name"</span>: <span class="pl-s">"Launch Program"</span><span class="pl-kos">,</span>
+        <span class="pl-s">"runtimeArgs"</span>: <span class="pl-kos">[</span>
+            <span class="pl-s">"-r"</span><span class="pl-kos">,</span>
+            <span class="pl-s">"ts-node/register"</span>
+        <span class="pl-kos">]</span><span class="pl-kos">,</span>
+        <span class="pl-s">"args"</span>: <span class="pl-kos">[</span>
+            <span class="pl-s">"workspaceFolder/src/index.ts"</span>
+        <span class="pl-kos">]</span>
+    <span class="pl-kos">}</span><span class="pl-kos">]</span><span class="pl-kos">,</span>
+<span class="pl-kos">}</span></pre></div>
+<p><strong>Note:</strong> If you are using the <code>--project &lt;tsconfig.json&gt;</code> command line argument as per the <a href="#configuration">Configuration Options</a>, and want to apply this same behavior when launching in VS Code, add an "env" key into the launch configuration: <code>"env": { "TS_NODE_PROJECT": "&lt;tsconfig.json&gt;" }</code>.</p>
+<h2>
+<a id="user-content-other" class="anchor" href="#other" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other</h2>
+<p>In many cases, setting <a href="https://nodejs.org/api/cli.html#cli_node_options_options" rel="nofollow"><code>NODE_OPTIONS</code></a> will enable <code>ts-node</code> within other node tools, child processes, and worker threads.</p>
+<div class="highlight highlight-source-shell"><pre>NODE_OPTIONS=<span class="pl-s"><span class="pl-pds">"</span>-r ts-node/register<span class="pl-pds">"</span></span></pre></div>
+<p>Or, if you require native ESM support:</p>
+<div class="highlight highlight-source-shell"><pre>NODE_OPTIONS=<span class="pl-s"><span class="pl-pds">"</span>--loader ts-node/esm<span class="pl-pds">"</span></span></pre></div>
+<p>This tells any node processes which receive this environment variable to install <code>ts-node</code>'s hooks before executing other code.</p>
+<h1>
+<a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+<p>ts-node is licensed under the MIT license.  <a href="https://github.com/TypeStrong/ts-node/blob/main/LICENSE">MIT</a></p>
+<p>ts-node includes source code from Node.js which is licensed under the MIT license.  <a href="https://raw.githubusercontent.com/nodejs/node/master/LICENSE" rel="nofollow">Node.js license information</a></p>
+<p>ts-node includes source code from the TypeScript compiler which is licensed under the Apache License 2.0.  <a href="https://github.com/microsoft/TypeScript/blob/master/LICENSE.txt">TypeScript license information</a></p>
+</div></article>
 `
