@@ -39,7 +39,7 @@ $ yarn run:js start
 
 ```sh
 $ yarn
-$ yarn run:js build
+$ yarn run:js build:test
 ```
 
 Then once the `output` directory is generated:
@@ -65,7 +65,7 @@ Then once the `output` directory is generated:
 - [x] Added bower support
 - [x] Ensure popup meets accessibility criteria
 - [x] Sonarcloud setup with webhook
-- [ ] Removing logs from deploy
+- [x] Removing logs from deploy
 
 ## Tech tasks
 
