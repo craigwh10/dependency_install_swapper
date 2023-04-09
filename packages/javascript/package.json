@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel popup.html",
-    "build": "rm -rf output && parcel build src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json && cp -r assets output/assets",
+    "build:test": "rm -rf output && NODE_ENV=test yarn build:common",
+    "build:prod": "rm -rf output && NODE_ENV=prod yarn build:common",
+    "build:common": "parcel build src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json && cp -r assets output/assets",
     "test:unit": "jest --config=./jest.config.js"
   },
   "targets": {
