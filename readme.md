@@ -48,7 +48,7 @@ Then once the `output` directory is generated:
 - [x] Improve styling of the popup
 - [x] Infer dev dependencies based on existence of command in readme
   - [x] With warning on missing readme detail
-  - [ ] No warning if readme contains regular install
+  - [x] No warning if readme contains regular install
 - [x] Added bower support
 
 ## Tech tasks
@@ -56,4 +56,5 @@ Then once the `output` directory is generated:
 - [x] Path aliases with parcel and tsc
 - [ ] Linting
 - [ ] Publishing with semver and generating distribution zips
-- [ ] Cypress E2E coverage
+- [ ] Automated compatibility coverage
+  - [ ] Requires help, tried puppeteer, cypress & playwright without much success with regards to testing extensions on manifest v3 appropriately.
