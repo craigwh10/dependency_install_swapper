@@ -52,6 +52,8 @@ Then once the `output` directory is generated:
   - [x] No warning if readme contains regular install
 - [x] Added bower support
 - [x] Ensure popup meets accessibility criteria
+- [x] Sonarcloud setup
+- [ ] Sonarcloud webhook on change
 - [ ] Removing logs from deploy
 
 ## Tech tasks
