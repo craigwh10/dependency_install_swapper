@@ -8,6 +8,10 @@ Lightweight google chrome extension which changes the install field in npmjs.com
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=code_smells)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=bugs)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
+[![Security by Snyk](https://img.shields.io/badge/Security%20by-Snyk-orange.svg?logo=snyk)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
+[![Known Vulnerabilities](https://snyk.io/test/github/craigwh10/dependency_install_swapper/badge.svg)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
+[![Canny](https://img.shields.io/badge/Canny-Suggestions-brightgreen.svg?style=flat-square&logo=canny)](https://dependency-install-swapper.canny.io/feature-requests)
+
 
 ![example](./docs/assets/example.png)
 
