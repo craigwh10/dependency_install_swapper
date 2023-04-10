@@ -18,7 +18,8 @@
         {
           "js": ["src/content/index.js"],
           "matches": [
-            "https://www.npmjs.com/package/*"
+            "https://www.npmjs.com/package/*",
+            "https://yarnpkg.com/package/*"
           ]
         }
       ]

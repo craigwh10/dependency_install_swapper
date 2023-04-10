@@ -1,10 +1,10 @@
-import { handleNpmInstallButton } from "@js/src/content/handleNpmInstallButton"
+import { handleInstallButton } from "@js/src/content/handleInstallButton"
 import { contentLogger } from "@js/src/utils"
 import { preferredPackageManager } from "@js/src/storage"
 import { waitFor } from "@testing-library/dom";
 
-jest.mock('@js/src/content/handleNpmInstallButton');
-const mockHandleNpmInstallButton = jest.mocked(handleNpmInstallButton);
+jest.mock('@js/src/content/handleInstallButton');
+const mockhandleInstallButton = jest.mocked(handleInstallButton);
 jest.mock('@js/src/utils');
 const mockContentLogger = jest.mocked(contentLogger);
 jest.mock('@js/src/storage');
@@ -27,7 +27,7 @@ describe('content script initialisation', () => {
                 require('@js/src/content/index');
 
                 await waitFor(() => {
-                    expect(mockHandleNpmInstallButton).toBeCalledWith('npm');
+                    expect(mockhandleInstallButton).toBeCalledWith('npm');
                     expect(mockContentLogger).toBeCalledWith('info', 'got preferred packaage manager - npm')
                 })
             })

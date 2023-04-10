@@ -66,6 +66,7 @@ Then once the `output` directory is generated:
 - [x] Ensure popup meets accessibility criteria
 - [x] Sonarcloud setup with webhook
 - [x] Removing logs from deploy
+- [ ] Yarnpkg support
 
 ## Tech tasks
 
