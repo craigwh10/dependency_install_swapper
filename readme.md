@@ -67,6 +67,9 @@ Then once the `output` directory is generated:
 - [x] Sonarcloud setup with webhook
 - [x] Removing logs from deploy
 - [x] Yarnpkg support
+- [x] SSR support (npmjs)
+- [x] CSR support (yarnpkg)
+- [x] Active tab switching support 
 
 ## Tech tasks
 

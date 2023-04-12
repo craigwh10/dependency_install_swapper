@@ -2,55 +2,69 @@ import { preferredPackageManager } from "../storage";
 import { contentLogger } from "../utils";
 import { updateCopyToClipboardButton } from "./updateCopyToClipboardButton";
 
+// Recieves signals from service worker that active tab has changed.
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.name === 'trigger_active_update_req') {
-    // after our signal that the page is loaded, we send the persisted state of the
-    // package manager to our content script from the service worker.
     contentLogger('info', `recieved from content: ${msg.payload.preferredPackageManager}`);
     updateCopyToClipboardButton(msg.payload.preferredPackageManager);
   }
 })
 
+let observer: MutationObserver;
 
-// function onReady() {
-//   // CSR solution:
-//   // when the DOM changes, signal to run an update
-//   // example being when you navigate from one package to another in the same app.
+/**
+ * Handles on load, and CSR navigation.
+ * @since
+ * yarnpkg.com support
+ * @satisfies
+ * CSR only yarnpkg, not SSR such as npmjs
+ */
+window.onload = function() {
+  const npmjsCmd = document.querySelector('code > span'); // this exists on yarnpkg also!
+  const npmjsOnlyEl = document.querySelector('#main');
 
-//   // signal to service worker that page has loaded to get initial state.
-//   chrome.runtime.sendMessage({name: 'register_cuuid_req'}, (response) => {
-//     contentLogger('info', `recieved from content: ${response.payload.preferredPackageManager}`);
-//     console.log('response');
-//     // updateCopyToClipboardButton(response.payload.preferredPackageManager);
-//   });
+  if (npmjsCmd && npmjsOnlyEl) {
+    console.log('npmjs!')
+    setTimeout(() => {
+      preferredPackageManager.get().then((res) => {
+        updateCopyToClipboardButton(res.preferredPackageManager);
+      })
+    }, 300)
 
-//   contentLogger('info', 'Content script is ready to receive messages');
-// }
+    // ignore observer usage.
+    return;
+  }
 
-window.onload =  function() {
-  const observer = new MutationObserver(function(mutations) {
+  observer = new MutationObserver(function() {
     // if the page is either yarnpkg or npmjsorg.
     // note that this script only runs on those on the whitelist!
-    const res = document.querySelectorAll('section > code > span')[0];
-    const textContent = res?.textContent;
-  
-    if (textContent) {
+    const yarnPkgCmd = document.querySelectorAll('section > code > span')[0];
+    const yarnPkgCmdText = yarnPkgCmd?.textContent;
+
+    if (yarnPkgCmdText) {
       setTimeout(() => {
         preferredPackageManager.get().then((res) => {
-          console.log('res', res);
           updateCopyToClipboardButton(res.preferredPackageManager);
         })
       }, 1000)
     }
   });
 
-  const isYarnPkg = document.querySelectorAll('main');
-  if (isYarnPkg) {
-    isYarnPkg.forEach((node) => {
+  // @Note: this isn't optimal, but is most effective.
+  // @TODO: Revisit this on enhancing observer specificity.
+  const availableDOM = document.querySelectorAll('main');
+  if (availableDOM) {
+    availableDOM.forEach((node) => {
       observer.observe(node, { characterData: true, subtree: true }); 
     })
   }
+}
 
+// Cleanup observer
+window.onunload = function () {
+  if (observer) {
+    observer.disconnect();
+  }
 }
 
 // on changes from popup
