@@ -1,26 +1,29 @@
 export function checkReadmeContainsCommand(readmePreText: string, packageOfInterest: string, checkForDevDep: boolean) {
     // replace for cleanup of newlines in readme (ref (1))
+    // breaks the readme text into an array so we can check each word.
     const stringArray = readmePreText.replace(/\n/g, ' ').split(' ');
-    const occurenceIndexesOfPkgMgrs = stringArray.map((val, idx) => {
-        if (['npm', 'bower', 'yarn', 'pnpm'].includes(val)) return idx;
-        return undefined;
-    }).filter((val) => val !== undefined) as number[]; // cast as undefined removed.
 
-    const anyOccurencesMeetsCondition = occurenceIndexesOfPkgMgrs.find((idx) => {
+    // using flat map over .map().filter((val) => val !== undefined)
+    // a more type safe approach.
+    const packageManagerIndices = stringArray.flatMap((text, idx) => (
+        ['npm', 'bower', 'yarn', 'pnpm'].includes(text) ? [idx] : [])
+    );
+
+    const packageFound = packageManagerIndices.some((idx) => {
         const fiveAhead = stringArray.slice(idx, idx + 5);
         const fiveAheadContainsPackage = fiveAhead.includes(packageOfInterest);
         const containsDevDep = fiveAhead.find((word) => {
             return ['-D', '--save-dev', '--dev'].includes(word);
         })
 
-        if (checkForDevDep) {
+        if (containsDevDep) {
             return fiveAheadContainsPackage && containsDevDep;
         }
 
-        return !containsDevDep && fiveAheadContainsPackage;
+        return !checkForDevDep && fiveAheadContainsPackage;
     })
 
-    return anyOccurencesMeetsCondition !== undefined;
+    return packageFound;
 };
 
 // decided not to use regex for control but this has limitations on

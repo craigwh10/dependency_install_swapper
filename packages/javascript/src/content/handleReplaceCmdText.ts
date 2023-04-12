@@ -1,10 +1,15 @@
 import { contentLogger } from "../utils";
 import { handleWarningMessage } from "./handleWarningMessage";
-import { hasInstallCommandsInReadme } from "./hasInstallCommandsInReadme";
+import { hasInstallCommandInReadme } from "./hasInstallCommandInReadme";
 
 export function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
     contentLogger('info', `trying to replace text for npm readme`)
 
+    const isDevDependency = packageNameOrNull && hasInstallCommandInReadme(packageNameOrNull, true);
+    const isRegularDependency = !packageNameOrNull && hasInstallCommandInReadme(packageNameOrDevDep, true);
+    const warning = document.querySelector('#dis-google-ext-warning');
+    const possiblyDevDependency = !hasInstallCommandInReadme(packageNameOrDevDep, true) && !hasInstallCommandInReadme(packageNameOrDevDep, false);
+    
     /**
      * @note
      * Bower does not have dev dependencies.
@@ -12,7 +17,6 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
      * Hence the logic here.
      */
     if (cmdPrefix === 'bower install') {
-        const warning = document.querySelector('#dis-google-ext-warning')
         if (warning) {
             contentLogger('info', `warning found from prior transform, removing potential dev dep warning from ui`)
             warning.remove();
@@ -31,8 +35,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
     }
 
     // hasn't been transformed - yarn add x, need to be dev dep.
-    const IS_NON_DEV_DEP_CMD = hasInstallCommandsInReadme(packageNameOrDevDep, true) && !packageNameOrNull; 
-    if (IS_NON_DEV_DEP_CMD) {
+    if (isRegularDependency) {
         contentLogger('info', `hasn't been transformed - e.g yarn add x, transforming to dev dep`)
 
         installButton.textContent = `${cmdPrefix} -D ${packageNameOrDevDep}`;
@@ -40,7 +43,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
     }
 
     // has been transformed - yarn add -D x, and needs to be dev dep.
-    if (packageNameOrNull && hasInstallCommandsInReadme(packageNameOrNull, true)) {
+    if (isDevDependency) {
         contentLogger('info', `has previously been transformed - e.g yarn add -D x, keeping as dev dep`)
 
         installButton.textContent = `${cmdPrefix} -D ${packageNameOrNull}`;
@@ -48,7 +51,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
     } 
 
     // has been transformed - yarn add -D x, and no longer needs dev dep.
-    if (packageNameOrNull && !hasInstallCommandsInReadme(packageNameOrNull, true)) {
+    if (packageNameOrNull && !hasInstallCommandInReadme(packageNameOrNull, true)) {
         contentLogger('info', `has previously been transformed - e.g yarn add -D x, removing dev dep`)
 
         installButton.textContent = `${cmdPrefix} ${packageNameOrNull}`;
@@ -57,7 +60,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
 
     // No readme reference so warn user about the
     // fact this could be a developer dependency.
-    if (!hasInstallCommandsInReadme(packageNameOrDevDep, true) && !hasInstallCommandsInReadme(packageNameOrDevDep, false) && !document.querySelector('#dis-google-ext-warning')) {
+    if (possiblyDevDependency && !warning) {
         handleWarningMessage();
     }
 

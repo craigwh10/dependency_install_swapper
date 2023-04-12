@@ -1,7 +1,7 @@
 import { contentLogger } from "../utils";
 import { checkReadmeContainsCommand } from "./checkReadmeContainsCommand";
 
-export function hasInstallCommandsInReadme (packageOfInterest: string, checkDev: boolean) {
+export function hasInstallCommandInReadme (packageOfInterest: string, checkDev: boolean) {
     const readme = document.querySelector('article');
 
     if (!readme) {
@@ -13,11 +13,8 @@ export function hasInstallCommandsInReadme (packageOfInterest: string, checkDev:
 
     const preElements = readme.querySelectorAll('pre');
 
-    const devDepScripts = Array.from(preElements).map(({textContent}) => {
+    return Array.from(preElements).some(({textContent}) => {
         if (!textContent) return false;
-        if (checkReadmeContainsCommand(textContent, packageOfInterest, checkDev)) return true;
-        return false;
+        return checkReadmeContainsCommand(textContent, packageOfInterest, checkDev);
     })
-    
-    return devDepScripts.includes(true);
 }

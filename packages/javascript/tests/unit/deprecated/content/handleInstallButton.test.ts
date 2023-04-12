@@ -1,4 +1,4 @@
-import { handleInstallButton } from "@js/src/content/handleInstallButton";
+import { handleInstallButton } from "@js/src/content/updateCopyToClipboardButton";
 import { hasInstallCommandsInReadme } from "@js/src/content/hasInstallCommandsInReadme";
 import { handleWarningMessage } from "@js/src/content/handleWarningMessage";
 import { availablePackageManagers } from "@js/src/storage";

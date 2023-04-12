@@ -16,4 +16,4 @@ export const handleWarningMessage = () => {
             '<div id="dis-google-ext-warning" style="color: #886701; background: #fff5db; padding: 16px; border: 1px solid #886701; border-radius: 5px;"><b>Warning:</b><br><br/>No example install commands found in readme.<br/><br/>So this could potentially be a development dependency.</div>'
         )
     }
-}
+};

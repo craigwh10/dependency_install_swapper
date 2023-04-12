@@ -1,4 +1,4 @@
-import { handleInstallButton } from "@js/src/content/handleInstallButton"
+import { handleInstallButton } from "@js/src/content/updateCopyToClipboardButton"
 import { contentLogger } from "@js/src/utils"
 import { preferredPackageManager } from "@js/src/storage"
 import { waitFor } from "@testing-library/dom";
