@@ -20,11 +20,13 @@ let observer: MutationObserver;
  * CSR only yarnpkg, not SSR such as npmjs
  */
 window.onload = function() {
+  contentLogger('info', 'onload browser event triggered')
+
   const npmjsCmd = document.querySelector('code > span'); // this exists on yarnpkg also!
   const npmjsOnlyEl = document.querySelector('#main');
 
   if (npmjsCmd && npmjsOnlyEl) {
-    console.log('npmjs!')
+    contentLogger('info', 'npmjs loaded')
     setTimeout(() => {
       preferredPackageManager.get().then((res) => {
         updateCopyToClipboardButton(res.preferredPackageManager);
@@ -42,6 +44,8 @@ window.onload = function() {
     const yarnPkgCmdText = yarnPkgCmd?.textContent;
 
     if (yarnPkgCmdText) {
+      contentLogger('info', 'found yarnpkg cmd text, triggering update handler')
+
       setTimeout(() => {
         preferredPackageManager.get().then((res) => {
           updateCopyToClipboardButton(res.preferredPackageManager);
@@ -50,10 +54,12 @@ window.onload = function() {
     }
   });
 
-  // @Note: this isn't optimal, but is most effective.
+  // @NOTE: this isn't optimal, but is most effective.
   // @TODO: Revisit this on enhancing observer specificity.
   const availableDOM = document.querySelectorAll('main');
   if (availableDOM) {
+    contentLogger('info', 'observer attached')
+
     availableDOM.forEach((node) => {
       observer.observe(node, { characterData: true, subtree: true }); 
     })
@@ -63,6 +69,7 @@ window.onload = function() {
 // Cleanup observer
 window.onunload = function () {
   if (observer) {
+    contentLogger('info', 'removing observer on unload')
     observer.disconnect();
   }
 }
