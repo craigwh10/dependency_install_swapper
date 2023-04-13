@@ -1,6 +1,6 @@
-# Dependency Install Swapper
+# Dependency Install Swapper (beta)
 
-Lightweight google chrome extension which changes the install field in npmjs.com to your preferred package manager.
+Lightweight google chrome extension which changes the install field in npmjs.com or yarnpkg.com to your preferred package manager.
 
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
@@ -66,6 +66,10 @@ Then once the `output` directory is generated:
 - [x] Ensure popup meets accessibility criteria
 - [x] Sonarcloud setup with webhook
 - [x] Removing logs from deploy
+- [x] Yarnpkg support
+- [x] SSR support (npmjs)
+- [x] CSR support (yarnpkg)
+- [x] Active tab switching support 
 
 ## Tech tasks
 

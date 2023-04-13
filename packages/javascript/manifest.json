@@ -1,8 +1,8 @@
 {
-    "name": "dependency_install_swapper_js",
-    "version": "1.0.2",
+    "name": "Dependency Install Swapper",
+    "version": "1.0.3",
     "manifest_version": 3,
-    "description": "Swap npm, yarn, pnpm & bower install links interchangeably on npmjs.com",
+    "description": "Swap npm, yarn, pnpm & bower install links interchangeably on npmjs and yarnpkg",
     "action": {
         "default_title": "Dependency Install Swapper",
         "default_popup": "popup.html"
@@ -13,13 +13,23 @@
       "48": "./assets/logo-48.png",
       "128": "./assets/logo-128.png"
     },
-    "permissions": ["activeTab", "storage"],
+    "permissions": [
+      "activeTab",
+      "storage",
+      "chrome://*/*",
+      "https://*/*"
+    ],
     "content_scripts": [
         {
           "js": ["src/content/index.js"],
           "matches": [
-            "https://www.npmjs.com/package/*"
+            "https://www.npmjs.com/package/*",
+            "https://yarnpkg.com/package/*"
           ]
         }
-      ]
+      ],
+      "background": {
+        "service_worker": "src/background/index.js",
+        "type": "module"
+      }
 }

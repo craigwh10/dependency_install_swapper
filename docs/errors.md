@@ -1,0 +1,4 @@
+- Throwing in the content script is best practice if something unexpected happens.
+- The content scripts aren't run so errors won't show if an error should run
+    - For example if the script can't find the install cmd then we should throw as that definitive behaviour.
+    - So elements we should work under confidence and assert they're defined to prevent crazy branching.

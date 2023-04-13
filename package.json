@@ -1,6 +1,6 @@
 {
   "name": "dependency_install_swapper",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,7 @@
     "add:js": "yarn workspace javascript add",
     "run:js": "yarn workspace javascript run",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
-    "unit:js": "yarn workspace javascript test:unit"
+    "test:js": "yarn workspace javascript test"
   },
   "workspaces": [
     "packages/*"
@@ -25,6 +25,11 @@
     "parcel-plugin-typescript": "^1.0.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node .husky/commit-msg"
+    }
   },
   "engines": {
     "node": "18"
