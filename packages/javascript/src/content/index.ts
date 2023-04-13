@@ -54,8 +54,6 @@ window.onload = function() {
     }
   });
 
-  // @NOTE: this isn't optimal, but is most effective.
-  // @TODO: Revisit this on enhancing observer specificity.
   const availableDOM = document.querySelectorAll('main');
   if (availableDOM) {
     contentLogger('info', 'observer attached')

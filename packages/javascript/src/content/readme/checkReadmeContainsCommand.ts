@@ -22,7 +22,7 @@ export function checkReadmeContainsCommand(readmePreText: string, packageOfInter
             return ['-D', '--save-dev', '--dev'].includes(word);
         })
 
-        if (checkForDevDep && containsDevDep) {
+        if (checkForDevDep) {
             return fiveAheadContainsPackage && containsDevDep;
         }
 
