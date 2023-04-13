@@ -1,4 +1,4 @@
-import { contentLogger } from "../utils";
+import { contentLogger } from "../../utils";
 
 interface GetInstallButton {
     site: 'yarn' | 'npm';

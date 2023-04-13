@@ -1,6 +1,6 @@
 import { preferredPackageManager } from "../storage";
 import { contentLogger } from "../utils";
-import { updateCopyToClipboardButton } from "./updateCopyToClipboardButton";
+import { updateCopyToClipboardButton } from "./command/updateCopyToClipboardButton";
 
 // Recieves signals from service worker that active tab has changed.
 chrome.runtime.onMessage.addListener((msg) => {
@@ -50,7 +50,7 @@ window.onload = function() {
         preferredPackageManager.get().then((res) => {
           updateCopyToClipboardButton(res.preferredPackageManager);
         })
-      }, 1000)
+      }, 1500)
     }
   });
 

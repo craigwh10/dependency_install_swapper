@@ -1,4 +1,4 @@
-import { updateCopyToClipboardButton } from "@js/src/content/updateCopyToClipboardButton";
+import { updateCopyToClipboardButton } from "@js/src/content/command/updateCopyToClipboardButton";
 import { devDepHtml, devDepWithNoReferenceInReadme, nonDevDepHtml } from "./yarnpkghtml";
 import { availablePackageManagers } from "@js/src/storage";
 

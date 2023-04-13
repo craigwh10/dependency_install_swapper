@@ -1,4 +1,4 @@
-# Dependency Install Swapper
+# Dependency Install Swapper (beta)
 
 Lightweight google chrome extension which changes the install field in npmjs.com or yarnpkg.com to your preferred package manager.
 

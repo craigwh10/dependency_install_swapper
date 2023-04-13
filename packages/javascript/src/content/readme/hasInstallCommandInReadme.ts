@@ -1,4 +1,4 @@
-import { contentLogger } from "../utils";
+import { contentLogger } from "../../utils";
 import { checkReadmeContainsCommand } from "./checkReadmeContainsCommand";
 
 export function hasInstallCommandInReadme (packageOfInterest: string, checkDev: boolean) {

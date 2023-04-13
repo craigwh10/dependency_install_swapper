@@ -1,6 +1,6 @@
-import { contentLogger } from "../utils";
+import { contentLogger } from "../../utils";
 import { handleWarningMessage } from "./handleWarningMessage";
-import { hasInstallCommandInReadme } from "./hasInstallCommandInReadme";
+import { hasInstallCommandInReadme } from "../readme/hasInstallCommandInReadme";
 
 export function handleReplaceText (installButton: Element, packageNameOrDevDep: string, packageNameOrNull: string | null, cmdPrefix: string) {
     contentLogger('info', `trying to replace text for npm readme`)

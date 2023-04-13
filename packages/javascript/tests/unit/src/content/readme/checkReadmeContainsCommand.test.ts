@@ -1,4 +1,4 @@
-import { checkReadmeContainsCommand } from "@js/src/content/checkReadmeContainsCommand";
+import { checkReadmeContainsCommand } from "@js/src/content/readme/checkReadmeContainsCommand";
 
 describe('stringContainsTheseWords', () => {
     it.each([
@@ -55,7 +55,7 @@ describe('stringContainsTheseWords', () => {
             string: 'yarn add --dev eslint-plugin-jest',
             word: 'eslint-plugin-jest'
         },
-    ])('[not checking dev dep] $string contains $word but no dev dep flag', ({string, word}) => {
+    ])('[not checking dev dep] checking for $word $string returns false', ({string, word}) => {
         expect(
             checkReadmeContainsCommand(string, word, false)
         ).toEqual(false);

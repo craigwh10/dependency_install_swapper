@@ -1,5 +1,5 @@
-import { availablePackageManagers } from "../storage";
-import { contentLogger } from "../utils";
+import { availablePackageManagers } from "../../storage";
+import { contentLogger } from "../../utils";
 import { getInstallButton } from "./getInstallButton";
 import { handleReplaceText } from "./handleReplaceCmdText";
 
@@ -11,7 +11,7 @@ const PACKAGE_MANAGERS: Record<availablePackageManagers, string> = {
 };
 
 export function updateCopyToClipboardButton (preferredPackageManager: availablePackageManagers) {
-    const {installButton } = getInstallButton();
+    const { installButton } = getInstallButton();
 
     // npm i -D packagename
     // npm i packagename
@@ -47,6 +47,5 @@ export function updateCopyToClipboardButton (preferredPackageManager: availableP
     }
 
     handleReplaceText(installButton.el, packageNameOrDevDep, packageNameOrNull, command);
-
 }
 

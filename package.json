@@ -8,7 +8,7 @@
     "add:js": "yarn workspace javascript add",
     "run:js": "yarn workspace javascript run",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
-    "unit:js": "yarn workspace javascript test:unit"
+    "test:js": "yarn workspace javascript test"
   },
   "workspaces": [
     "packages/*"

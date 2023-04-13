@@ -1,3 +1,9 @@
+/**
+ * Checks whether there is a regular dependency or dev dependency independently.
+ * --
+ * If you provide checkForDev dep is will return false if there is a regular dependency.
+ * If you dont then it will return false if there is a dev dependency.
+ */
 export function checkReadmeContainsCommand(readmePreText: string, packageOfInterest: string, checkForDevDep: boolean) {
     // replace for cleanup of newlines in readme (ref (1))
     // breaks the readme text into an array so we can check each word.
@@ -16,11 +22,11 @@ export function checkReadmeContainsCommand(readmePreText: string, packageOfInter
             return ['-D', '--save-dev', '--dev'].includes(word);
         })
 
-        if (containsDevDep) {
+        if (checkForDevDep && containsDevDep) {
             return fiveAheadContainsPackage && containsDevDep;
         }
 
-        return !checkForDevDep && fiveAheadContainsPackage;
+        return !checkForDevDep && !containsDevDep && fiveAheadContainsPackage;
     })
 
     return packageFound;
