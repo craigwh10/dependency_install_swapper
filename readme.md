@@ -12,8 +12,7 @@ Lightweight google chrome extension which changes the install field in npmjs.com
 [![Known Vulnerabilities](https://snyk.io/test/github/craigwh10/dependency_install_swapper/badge.svg)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
 [![Canny](https://img.shields.io/badge/Canny-Suggestions-brightgreen.svg?style=flat-square&logo=canny)](https://dependency-install-swapper.canny.io/feature-requests)
 
-
-![example](./docs/assets/example.png)
+https://user-images.githubusercontent.com/53788596/231875212-64be2a2c-63a8-472c-bca6-d6dd729aee0d.mp4
 
 ## Want to raise a bug or suggestion?
 
