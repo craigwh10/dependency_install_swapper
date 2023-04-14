@@ -1,6 +1,6 @@
-import { updateCopyToClipboardButton } from "@js/src/content/command/updateCopyToClipboardButton";
+import { updateCopyToClipboardButton } from "@chrome/src/content/command/updateCopyToClipboardButton";
 import { devDepHtml, devDepWithNoReferenceInReadme, nonDevDepHtml } from "./npmjshtml";
-import { availablePackageManagers } from "@js/src/storage";
+import { availablePackageManagers } from "@chrome/src/storage";
 
 describe('when on npmjs.com', () => {
     beforeEach(() => {

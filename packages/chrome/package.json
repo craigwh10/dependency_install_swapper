@@ -1,5 +1,5 @@
 {
-  "name": "javascript",
+  "name": "chrome",
   "version": "1.0.3",
   "license": "MIT",
   "scripts": {
@@ -16,6 +16,6 @@
     }
   },
   "alias": {
-    "@js/*": "./$1"
+    "@chrome/*": "./$1"
   }
 }

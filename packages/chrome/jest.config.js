@@ -3,6 +3,6 @@ const sharedConfig = require('../../jest.config');
 module.exports = {
     ...sharedConfig,
     "moduleNameMapper": {
-        "^@js(.*)$": "<rootDir>/$1",
+        "^@chrome(.*)$": "<rootDir>/$1",
     } 
   };

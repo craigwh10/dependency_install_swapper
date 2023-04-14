@@ -5,10 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "add:js": "yarn workspace javascript add",
-    "run:js": "yarn workspace javascript run",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
-    "test:js": "yarn workspace javascript test"
+    "add:c": "yarn workspace chrome add",
+    "run:c": "yarn workspace chrome run",
+    "test:c": "yarn workspace chrome test"
   },
   "workspaces": [
     "packages/*"

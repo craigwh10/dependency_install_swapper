@@ -1,4 +1,4 @@
-import { checkReadmeContainsCommand } from "@js/src/content/readme/checkReadmeContainsCommand";
+import { checkReadmeContainsCommand } from "@chrome/src/content/readme/checkReadmeContainsCommand";
 
 describe('stringContainsTheseWords', () => {
     it.each([

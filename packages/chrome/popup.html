@@ -10,7 +10,7 @@
             </header>
             <main class="px-g py-b">
                 <label name="preferred-package-manager" class="py-b">
-                    My preferred npmjs.com package manager:
+                    My preferred package manager:
                 </label>
                 <select
                     name="preferred-package-manager"
@@ -67,12 +67,13 @@
                     </div>
                     <div class="ml-auto">
                         <a
-                            href="https://craigwh.it"
+                            href="https://dependency-install-swapper.canny.io/feature-requests"
                             target="_blank"
                             rel="noopener"
-                            aria-label="navigates you to the website of the person that made this extension"
+                            class="feature-request-btn"
+                            aria-label="navigates you to a site to make feature requests for this extensions"
                         >
-                            <img src="https://img.shields.io/badge/Made%20by-craigwh.it-blue?style=flat-square" alt="Made by craigwh.it">
+                            Request Feature
                         </a>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                 margin: 0px;
             }
 
-            h1, label {
+            h1, label, a {
                 margin-block-start: 0;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
             }
@@ -139,6 +140,24 @@
 
             footer {
                 border-top: 1px solid lightgray;
+
+            }
+
+            footer .feature-request-btn {
+                color: white;
+                padding: 0em 0.5em;
+                background-color: #525df9;
+                font-size: 11px;
+                height: 20px;
+                border-radius: 2px;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            footer img, a {
+                display: inline-block;
+                vertical-align: middle;
             }
 
             footer ul {

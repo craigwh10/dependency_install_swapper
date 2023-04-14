@@ -31,20 +31,20 @@ This section contains detail on how you run this application locally, as well as
 
 ```sh
 $ yarn
-$ yarn run:js start
+$ yarn run:c start
 ```
 
 ### Running in "production"
 
 ```sh
 $ yarn
-$ yarn run:js build:test
+$ yarn run:c build:test
 ```
 
 Then once the `output` directory is generated:
 
 - Go to `chrome://extensions`
-- Load unpacked pointing at `packages/javascript/output`
+- Load unpacked pointing at `packages/chrome/output`
 - Then you should see the extension
 
 ### Notes

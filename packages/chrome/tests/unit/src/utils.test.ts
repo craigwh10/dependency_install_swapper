@@ -1,4 +1,4 @@
-import { popupLogger, contentLogger } from "@js/src/utils";
+import { popupLogger, contentLogger } from "@chrome/src/utils";
 
 describe('utils', () => {
     describe('loggers', () => {

@@ -1,6 +1,6 @@
-import { updateCopyToClipboardButton } from "@js/src/content/command/updateCopyToClipboardButton";
+import { updateCopyToClipboardButton } from "@chrome/src/content/command/updateCopyToClipboardButton";
 import { devDepHtml, devDepWithNoReferenceInReadme, nonDevDepHtml } from "./yarnpkghtml";
-import { availablePackageManagers } from "@js/src/storage";
+import { availablePackageManagers } from "@chrome/src/storage";
 
 describe('when on yarnpkg.com', () => {
     beforeEach(() => {
