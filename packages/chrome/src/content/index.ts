@@ -32,7 +32,7 @@ window.onload = function () {
   const npmjsCmd = document.querySelector('code > span') // this exists on yarnpkg also!
   const npmjsOnlyEl = document.querySelector('#main')
 
-  if ((npmjsCmd != null) && (npmjsOnlyEl != null)) {
+  if ((npmjsCmd !== null) && (npmjsOnlyEl !== null)) {
     contentLogger('info', 'npmjs loaded')
     setTimeout(() => {
       preferredPackageManager.get().then((res) => {
@@ -40,8 +40,7 @@ window.onload = function () {
       }).catch((err) => {
         contentLogger('warn', err.message)
       })
-    }, 300)
-
+    }, 200)
     // ignore observer usage.
     return
   }
@@ -52,7 +51,7 @@ window.onload = function () {
     const yarnPkgCmd = document.querySelectorAll('section > code > span')[0]
     const yarnPkgCmdText = yarnPkgCmd?.textContent
 
-    if (yarnPkgCmdText != null || yarnPkgCmdText !== '') {
+    if (yarnPkgCmdText !== null) {
       contentLogger('info', 'found yarnpkg cmd text, triggering update handler')
 
       setTimeout(() => {
@@ -77,7 +76,7 @@ window.onload = function () {
 
 // Cleanup observer
 window.onunload = function () {
-  if (observer != null) {
+  if (observer !== null) {
     contentLogger('info', 'removing observer on unload')
     observer.disconnect()
   }
@@ -90,7 +89,7 @@ interface FromPopupMessage {
 // on changes from popup
 chrome.runtime.onMessage.addListener(
   function (request: FromPopupMessage) {
-    if (request.preferredPackageManager != null) {
+    if (request.preferredPackageManager !== null) {
       contentLogger('info', `recieved from popup: ${request.preferredPackageManager}`)
       updateCopyToClipboardButton(request.preferredPackageManager)
     }
