@@ -2,15 +2,16 @@
 
 Lightweight google chrome extension which changes the install field in npmjs.com or yarnpkg.com to your preferred package manager.
 
+[![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard)
+[![Security by Snyk](https://img.shields.io/badge/Security%20by-Snyk-orange.svg?logo=snyk)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
+[![Canny](https://img.shields.io/badge/Canny-Suggestions-brightgreen.svg?style=flat-square&logo=canny)](https://dependency-install-swapper.canny.io/feature-requests)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=security_rating)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=code_smells)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=craigwh10_dependency_install_swapper&metric=bugs)](https://sonarcloud.io/dashboard?id=craigwh10_dependency_install_swapper)
-[![Security by Snyk](https://img.shields.io/badge/Security%20by-Snyk-orange.svg?logo=snyk)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
-[![Known Vulnerabilities](https://snyk.io/test/github/craigwh10/dependency_install_swapper/badge.svg)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
-[![Canny](https://img.shields.io/badge/Canny-Suggestions-brightgreen.svg?style=flat-square&logo=canny)](https://dependency-install-swapper.canny.io/feature-requests)
+
 
 https://user-images.githubusercontent.com/53788596/231875212-64be2a2c-63a8-472c-bca6-d6dd729aee0d.mp4
 
@@ -30,15 +31,13 @@ This section contains detail on how you run this application locally, as well as
 ### Running locally
 
 ```sh
-$ yarn
-$ yarn run:c start
+yarn && yarn run:chrome start
 ```
 
 ### Running in "production"
 
 ```sh
-$ yarn
-$ yarn run:c build:test
+yarn && yarn run:chrome build:test
 ```
 
 Then once the `output` directory is generated:
@@ -68,12 +67,12 @@ Then once the `output` directory is generated:
 - [x] Yarnpkg support
 - [x] SSR support (npmjs)
 - [x] CSR support (yarnpkg)
-- [x] Active tab switching support 
+- [x] Active tab switching support
 
 ## Tech tasks
 
 - [x] Path aliases with parcel and tsc
-- [ ] Linting
+- [x] Linting (ts-standard)
 - [ ] Publishing with Semver and generating distribution zips
 - [ ] Automated compatibility coverage
   - [ ] Requires help, tried puppeteer, cypress & playwright without much success with regards to testing extensions on manifest v3 appropriately.

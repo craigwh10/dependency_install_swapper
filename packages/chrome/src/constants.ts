@@ -1,1 +1,1 @@
-export const preferenceKey = 'preferredPackageManager';
+export const preferenceKey = 'preferredPackageManager'
