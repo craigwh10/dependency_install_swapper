@@ -6,7 +6,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
   contentLogger('info', 'trying to replace text for npm readme')
 
   // yarn add -D package
-  const cmdGreaterThan3Words = packageNameOrNull !== null
+  const cmdGreaterThan3Words = packageNameOrNull != null
 
   const isDevDependency = cmdGreaterThan3Words && hasInstallCommandInReadme(packageNameOrNull, true)
   const isRegularDependency = !cmdGreaterThan3Words && hasInstallCommandInReadme(packageNameOrDevDep, true)
@@ -63,7 +63,7 @@ export function handleReplaceText (installButton: Element, packageNameOrDevDep: 
 
   // No readme reference so warn user about the
   // fact this could be a developer dependency.
-  if (possiblyDevDependency && (warning === null)) {
+  if (possiblyDevDependency && (warning == null)) {
     handleWarningMessage()
   }
 
