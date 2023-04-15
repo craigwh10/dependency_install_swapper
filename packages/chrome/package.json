@@ -7,7 +7,8 @@
     "build:test": "rm -rf output && NODE_ENV=test yarn build:common",
     "build:prod": "rm -rf output && NODE_ENV=prod yarn build:common",
     "build:common": "parcel build src/background/index.ts src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json && cp -r assets output/assets",
-    "test": "jest --config=./jest.config.js"
+    "test": "jest --config=./jest.config.js",
+    "aut": "jest --config=./tests/e2e/jest.config.js tests/e2e"
   },
   "targets": {
     "default": {
