@@ -34,7 +34,7 @@ export const getInstallButton = (): GetInstallButton => {
       site: 'npm',
       installButton: validateInstallButtonExistence(
         document.querySelector('span[role="button"]')
-      ),
+      )
     }
   }
 

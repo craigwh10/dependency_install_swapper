@@ -43,7 +43,7 @@ describe('when on yarnpkg.com', () => {
   ])('for non dev dep readme and preferred package $prefPkgManager: npm install cellular-automata-react becomes $expectedCmd with no warning', ({ prefPkgManager, expectedCmd }) => {
     document.body.innerHTML = nonDevDepHtml
 
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
+    updateCopyToClipboardButton.fromCmdButton(prefPkgManager as availablePackageManagers)
 
     expect(document.querySelector('section > code > span')).toBeDefined()
     expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
@@ -70,7 +70,7 @@ describe('when on yarnpkg.com', () => {
   ])('for dev dep readme and preferred package $prefPkgManager: npm install eslint-plugin-jest becomes $expectedCmd with no warning', ({ prefPkgManager, expectedCmd }) => {
     document.body.innerHTML = devDepHtml
 
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
+    updateCopyToClipboardButton.fromCmdButton(prefPkgManager as availablePackageManagers)
 
     expect(document.querySelector('section > code > span')).toBeDefined()
     expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
@@ -97,7 +97,7 @@ describe('when on yarnpkg.com', () => {
   ])('for non dev dep readme and preferred package $prefPkgManager: npm install eslint becomes $expectedCmd and shows warning', ({ prefPkgManager, expectedCmd }) => {
     document.body.innerHTML = devDepWithNoReferenceInReadme
 
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
+    updateCopyToClipboardButton.fromCmdButton(prefPkgManager as availablePackageManagers)
 
     expect(document.querySelector('section > code > span')).toBeDefined()
     expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
