@@ -5,10 +5,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "add:js": "yarn workspace javascript add",
-    "run:js": "yarn workspace javascript run",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
-    "test:js": "yarn workspace javascript test"
+    "add:chrome": "yarn workspace chrome add",
+    "run:chrome": "yarn workspace chrome run",
+    "test:chrome": "yarn workspace chrome test",
+    "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix"
   },
   "workspaces": [
     "packages/*"
@@ -24,6 +25,7 @@
     "parcel": "^2.8.3",
     "parcel-plugin-typescript": "^1.0.0",
     "ts-jest": "^29.1.0",
+    "ts-standard": "^12.0.2",
     "typescript": "^5.0.3"
   },
   "husky": {
@@ -33,5 +35,11 @@
   },
   "engines": {
     "node": "18"
+  },
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "**/tests/**"
+    ]
   }
 }
