@@ -1,7 +1,7 @@
 import { availablePackageManagers } from '../../storage'
 import { contentLogger } from '../../utils'
 import { getInstallButton } from './getInstallButton'
-import { handleReplaceText } from './handleReplaceCmdText'
+import { handleReplaceCmdText } from './handleReplaceCmdText'
 
 const PACKAGE_MANAGERS: Record<availablePackageManagers, string> = {
   yarn: 'yarn add',
@@ -21,16 +21,16 @@ export const updateCopyToClipboardButton = {
     fromPath: (preferredPackageManager: availablePackageManagers): void => {
         updateCopyToClipboardButtonHandler(
             preferredPackageManager,
-            ({command}) => handleReplaceText.fromPath(
+            ({command}) => handleReplaceCmdText.fromPath(
                 command
             )
         )
     },
-    fromButton: (preferredPackageManager: availablePackageManagers) => {
+    fromCmdButton: (preferredPackageManager: availablePackageManagers) => {
         updateCopyToClipboardButtonHandler(
             preferredPackageManager,
             ({command, packageNameOrDevDep, packageNameOrNull}) => {
-                handleReplaceText.handleReplaceTextFromClipboard(
+                handleReplaceCmdText.fromCmdButton(
                     command,
                     packageNameOrDevDep,
                     packageNameOrNull,

@@ -1,4 +1,4 @@
-import { availablePackageManagers, preferredPackageManager } from '../storage'
+import { availablePackageManagers } from '../storage'
 import { contentLogger } from '../utils'
 import { updateCommandFromStore } from './command/updateCommandFromStore'
 import { updateCopyToClipboardButton } from './command/updateCopyToClipboardButton'
@@ -14,11 +14,10 @@ interface MessageType {
 chrome.runtime.onMessage.addListener((msg: MessageType) => {
   if (msg.name === 'trigger_active_update_req') {
     contentLogger('info', `recieved from content: ${msg.payload.preferredPackageManager}`)
-    updateCopyToClipboardButton.fromButton(msg.payload.preferredPackageManager)
+    updateCopyToClipboardButton.fromCmdButton(msg.payload.preferredPackageManager)
   }
 })
 
-// const yarnPkgObserver = new YarnPkgObserver();
 let prevUrl: string | undefined = undefined;
 let interval: NodeJS.Timer;
 
@@ -32,14 +31,16 @@ window.onload = function () {
     if (activeUrl != prevUrl) {
       // URL changed
       prevUrl = activeUrl;
+      contentLogger('info', `url clock picked up url change to ${activeUrl} from ${prevUrl}`);
       updateCommandFromStore(0, updateCopyToClipboardButton.fromPath);
     }
-  }, 500);
+  }, 200);
 }
 
-// Cleanup observers
 window.onunload = function () {
-    clearInterval(interval)
+  // cleanup URL polling clocks
+  contentLogger('info', 'unload event called');
+  clearInterval(interval)
 }
 
 interface FromPopupMessage {
@@ -51,7 +52,7 @@ chrome.runtime.onMessage.addListener(
   function (request: FromPopupMessage) {
     if (request.preferredPackageManager !== null) {
       contentLogger('info', `recieved from popup: ${request.preferredPackageManager}`)
-      updateCopyToClipboardButton.fromButton(request.preferredPackageManager)
+      updateCopyToClipboardButton.fromCmdButton(request.preferredPackageManager)
     }
   }
 )
