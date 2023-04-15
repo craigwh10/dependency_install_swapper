@@ -1,7 +1,7 @@
 import { availablePackageManagers } from '../../storage'
 import { contentLogger } from '../../utils'
 import { getInstallButton } from './getInstallButton'
-import { handleReplaceText } from './handleReplaceCmdText'
+import { handleReplaceCmdText } from './handleReplaceCmdText'
 
 const PACKAGE_MANAGERS: Record<availablePackageManagers, string> = {
   yarn: 'yarn add',
@@ -10,7 +10,37 @@ const PACKAGE_MANAGERS: Record<availablePackageManagers, string> = {
   bower: 'bower install'
 }
 
-export function updateCopyToClipboardButton (preferredPackageManager: availablePackageManagers): void {
+export const updateCopyToClipboardButton = {
+  fromPath: (preferredPackageManager: availablePackageManagers): void => {
+    updateCopyToClipboardButtonHandler(
+      preferredPackageManager,
+      ({ command }) => handleReplaceCmdText.fromPath(
+        command
+      )
+    )
+  },
+  fromCmdButton: (preferredPackageManager: availablePackageManagers) => {
+    updateCopyToClipboardButtonHandler(
+      preferredPackageManager,
+      ({ command, packageNameOrDevDep, packageNameOrNull }) => {
+        handleReplaceCmdText.fromCmdButton(
+          command,
+          packageNameOrDevDep,
+          packageNameOrNull
+        )
+      }
+    )
+  }
+}
+
+interface UpdateCopyToClipboardButtonCbParams {
+  el: Element
+  packageNameOrDevDep: string
+  packageNameOrNull: string | null
+  command: string
+}
+
+function updateCopyToClipboardButtonHandler (preferredPackageManager: availablePackageManagers, cb: (params: UpdateCopyToClipboardButtonCbParams) => void): void {
   const { installButton } = getInstallButton()
 
   // npm i -D packagename
@@ -22,12 +52,7 @@ export function updateCopyToClipboardButton (preferredPackageManager: availableP
     packageNameOrDevDep,
     // packagename or nothing
     packageNameOrNull
-  ] = installButton.elText.split(' ') as [
-    availablePackageManagers,
-    string,
-    string,
-    string | null
-  ]
+  ] = installButton.splitElText
 
   contentLogger('info', JSON.stringify({
     prefix,
@@ -42,9 +67,10 @@ export function updateCopyToClipboardButton (preferredPackageManager: availableP
   }
 
   if (!['yarn', 'npm', 'pnpm', 'bower'].includes(prefix)) {
-    contentLogger('warn', `unknown install prefix: ${prefix}`)
+    contentLogger('warn', `unknown install prefix: ${prefix as string}`)
     return
   }
 
-  handleReplaceText(installButton.el, packageNameOrDevDep, packageNameOrNull, command)
+  const res = { el: installButton.el, packageNameOrDevDep, packageNameOrNull, command }
+  cb(res)
 }

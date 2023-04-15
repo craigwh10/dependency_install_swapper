@@ -1,5 +1,6 @@
-import { availablePackageManagers, preferredPackageManager } from '../storage'
+import { availablePackageManagers } from '../storage'
 import { contentLogger } from '../utils'
+import { updateCommandFromStore } from './command/updateCommandFromStore'
 import { updateCopyToClipboardButton } from './command/updateCopyToClipboardButton'
 
 interface MessageType {
@@ -13,73 +14,33 @@ interface MessageType {
 chrome.runtime.onMessage.addListener((msg: MessageType) => {
   if (msg.name === 'trigger_active_update_req') {
     contentLogger('info', `recieved from content: ${msg.payload.preferredPackageManager}`)
-    updateCopyToClipboardButton(msg.payload.preferredPackageManager)
+    updateCopyToClipboardButton.fromCmdButton(msg.payload.preferredPackageManager)
   }
 })
 
-let observer: MutationObserver
+let prevUrl: string | undefined
+let interval: NodeJS.Timer
 
-/**
- * Handles on load, and CSR navigation.
- * @since
- * yarnpkg.com support
- * @satisfies
- * CSR only yarnpkg, not SSR such as npmjs
- */
 window.onload = function () {
   contentLogger('info', 'onload browser event triggered')
 
-  const npmjsCmd = document.querySelector('code > span') // this exists on yarnpkg also!
-  const npmjsOnlyEl = document.querySelector('#main')
+  // URL polling clock.
+  setInterval(() => {
+    const activeUrl = window.location.href
 
-  if ((npmjsCmd !== null) && (npmjsOnlyEl !== null)) {
-    contentLogger('info', 'npmjs loaded')
-    setTimeout(() => {
-      preferredPackageManager.get().then((res) => {
-        updateCopyToClipboardButton(res.preferredPackageManager)
-      }).catch((err) => {
-        contentLogger('warn', err.message)
-      })
-    }, 200)
-    // ignore observer usage.
-    return
-  }
-
-  observer = new MutationObserver(function () {
-    // if the page is either yarnpkg or npmjsorg.
-    // note that this script only runs on those on the whitelist!
-    const yarnPkgCmd = document.querySelectorAll('section > code > span')[0]
-    const yarnPkgCmdText = yarnPkgCmd?.textContent
-
-    if (yarnPkgCmdText !== null) {
-      contentLogger('info', 'found yarnpkg cmd text, triggering update handler')
-
-      setTimeout(() => {
-        preferredPackageManager.get().then((res) => {
-          updateCopyToClipboardButton(res.preferredPackageManager)
-        }).catch((err) => {
-          contentLogger('warn', err.message)
-        })
-      }, 1500)
+    if (activeUrl !== prevUrl) {
+      // URL changed
+      prevUrl = activeUrl
+      contentLogger('info', `url clock picked up url change to ${activeUrl} from ${prevUrl}`)
+      updateCommandFromStore(0, updateCopyToClipboardButton.fromPath)
     }
-  })
-
-  const availableDOM = document.querySelectorAll('main')
-  if (availableDOM.length !== 0) {
-    contentLogger('info', 'observer attached')
-
-    availableDOM.forEach((node) => {
-      observer.observe(node, { characterData: true, subtree: true })
-    })
-  }
+  }, 200)
 }
 
-// Cleanup observer
 window.onunload = function () {
-  if (observer !== null) {
-    contentLogger('info', 'removing observer on unload')
-    observer.disconnect()
-  }
+  // cleanup URL polling clocks
+  contentLogger('info', 'unload event called')
+  clearInterval(interval)
 }
 
 interface FromPopupMessage {
@@ -91,7 +52,7 @@ chrome.runtime.onMessage.addListener(
   function (request: FromPopupMessage) {
     if (request.preferredPackageManager !== null) {
       contentLogger('info', `recieved from popup: ${request.preferredPackageManager}`)
-      updateCopyToClipboardButton(request.preferredPackageManager)
+      updateCopyToClipboardButton.fromCmdButton(request.preferredPackageManager)
     }
   }
 )

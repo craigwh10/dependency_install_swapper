@@ -1,6 +1,6 @@
-import { updateCopyToClipboardButton } from '@chrome/src/content/command/updateCopyToClipboardButton'
 import { devDepHtml, devDepWithNoReferenceInReadme, nonDevDepHtml } from './yarnpkghtml'
-import { availablePackageManagers } from '@chrome/src/storage'
+import { shouldTransformToRegularDep } from './transformations/shouldTransformToRegularDep'
+import { shouldTransformToDevDepCmd } from './transformations/shouldTransformToDevDepCmd'
 
 describe('when on yarnpkg.com', () => {
   beforeEach(() => {
@@ -23,84 +23,23 @@ describe('when on yarnpkg.com', () => {
     })
   })
 
-  it.each([
-    {
-      prefPkgManager: 'yarn',
-      expectedCmd: 'yarn add cellular-automata-react'
-    },
-    {
-      prefPkgManager: 'npm',
-      expectedCmd: 'npm i cellular-automata-react'
-    },
-    {
-      prefPkgManager: 'bower',
-      expectedCmd: 'bower install cellular-automata-react'
-    },
-    {
-      prefPkgManager: 'pnpm',
-      expectedCmd: 'pnpm add cellular-automata-react'
-    }
-  ])('for non dev dep readme and preferred package $prefPkgManager: npm install cellular-automata-react becomes $expectedCmd with no warning', ({ prefPkgManager, expectedCmd }) => {
-    document.body.innerHTML = nonDevDepHtml
-
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
-
-    expect(document.querySelector('section > code > span')).toBeDefined()
-    expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
-    expect(document.querySelector('#dis-google-ext-warning')).toBeNull()
+  shouldTransformToRegularDep({
+    html: nonDevDepHtml,
+    packageName: 'cellular-automata-react',
+    selector: 'section > code > span',
+    withWarning: false,
   })
 
-  it.each([
-    {
-      prefPkgManager: 'yarn',
-      expectedCmd: 'yarn add -D eslint-plugin-jest'
-    },
-    {
-      prefPkgManager: 'npm',
-      expectedCmd: 'npm i -D eslint-plugin-jest'
-    },
-    {
-      prefPkgManager: 'bower',
-      expectedCmd: 'bower install eslint-plugin-jest'
-    },
-    {
-      prefPkgManager: 'pnpm',
-      expectedCmd: 'pnpm add -D eslint-plugin-jest'
-    }
-  ])('for dev dep readme and preferred package $prefPkgManager: npm install eslint-plugin-jest becomes $expectedCmd with no warning', ({ prefPkgManager, expectedCmd }) => {
-    document.body.innerHTML = devDepHtml
-
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
-
-    expect(document.querySelector('section > code > span')).toBeDefined()
-    expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
-    expect(document.querySelector('#dis-google-ext-warning')).toBeNull()
+  shouldTransformToDevDepCmd({
+    html: devDepHtml,
+    packageName: 'eslint-plugin-jest',
+    selector: 'section > code > span'
   })
 
-  it.each([
-    {
-      prefPkgManager: 'yarn',
-      expectedCmd: 'yarn add jest'
-    },
-    {
-      prefPkgManager: 'npm',
-      expectedCmd: 'npm i jest'
-    },
-    {
-      prefPkgManager: 'bower',
-      expectedCmd: 'bower install jest'
-    },
-    {
-      prefPkgManager: 'pnpm',
-      expectedCmd: 'pnpm add jest'
-    }
-  ])('for non dev dep readme and preferred package $prefPkgManager: npm install eslint becomes $expectedCmd and shows warning', ({ prefPkgManager, expectedCmd }) => {
-    document.body.innerHTML = devDepWithNoReferenceInReadme
-
-    updateCopyToClipboardButton(prefPkgManager as availablePackageManagers)
-
-    expect(document.querySelector('section > code > span')).toBeDefined()
-    expect(document.querySelector('section > code > span')?.textContent).toEqual(expectedCmd)
-    expect(document.querySelector('#dis-google-ext-warning')).toBeDefined()
+  shouldTransformToRegularDep({
+    html: devDepWithNoReferenceInReadme,
+    packageName: 'jest',
+    selector: 'section > code > span',
+    withWarning: true
   })
 })

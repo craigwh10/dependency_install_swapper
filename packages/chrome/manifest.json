@@ -15,9 +15,7 @@
     },
     "permissions": [
       "activeTab",
-      "storage",
-      "chrome://*/*",
-      "https://*/*"
+      "storage"
     ],
     "content_scripts": [
         {

@@ -1,10 +1,19 @@
+import { availablePackageManagers } from '@chrome/src/storage'
 import { contentLogger } from '../../utils'
+
+type splitElReturn = [
+  availablePackageManagers,
+  string,
+  string,
+  string | null
+]
 
 interface GetInstallButton {
   site: 'yarn' | 'npm'
   installButton: {
     el: Element
     elText: string
+    splitElText: splitElReturn
   }
 }
 
@@ -35,6 +44,7 @@ export const getInstallButton = (): GetInstallButton => {
 interface ValidateInstallButtonReturn {
   el: Element
   elText: string
+  splitElText: splitElReturn
 }
 
 function validateInstallButtonExistence (installButton: Element | null): ValidateInstallButtonReturn {
@@ -54,6 +64,7 @@ function validateInstallButtonExistence (installButton: Element | null): Validat
 
   return {
     el: installButton,
-    elText: npmInstallText.trim()
+    elText: npmInstallText.trim(),
+    splitElText: npmInstallText.trim().split(' ') as splitElReturn
   }
 }
