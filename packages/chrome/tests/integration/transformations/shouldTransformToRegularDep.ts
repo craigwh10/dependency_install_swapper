@@ -1,5 +1,6 @@
 import { updateCopyToClipboardButton } from "@chrome/src/content/command/updateCopyToClipboardButton"
 import { availablePackageManagers } from "@chrome/src/storage"
+import { generateTransformationCases } from "./generateCases"
 
 interface Params {
     html: string
@@ -14,24 +15,10 @@ export const shouldTransformToRegularDep = ({
     packageName,
     withWarning
 }: Params) => {
-    it.each([
-        {
-          prefPkgManager: 'yarn',
-          expectedCmd: `yarn add ${packageName}`
-        },
-        {
-          prefPkgManager: 'npm',
-          expectedCmd: `npm i ${packageName}`
-        },
-        {
-          prefPkgManager: 'bower',
-          expectedCmd: `bower install ${packageName}`
-        },
-        {
-          prefPkgManager: 'pnpm',
-          expectedCmd: `pnpm add ${packageName}`
-        }
-      ])(`for non dev dep readme and preferred package $prefPkgManager: npm install ${packageName} becomes $expectedCmd with no warning`, ({ prefPkgManager, expectedCmd }) => {
+    it.each(generateTransformationCases({
+      packageName,
+      expectDevDep: false
+    }))(`for non dev dep readme and preferred package $prefPkgManager: npm install ${packageName} becomes $expectedCmd with no warning`, ({ prefPkgManager, expectedCmd }) => {
         document.body.innerHTML = html
     
         updateCopyToClipboardButton.fromCmdButton(prefPkgManager as availablePackageManagers)
