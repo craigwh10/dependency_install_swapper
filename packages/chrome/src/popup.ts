@@ -2,7 +2,7 @@ import { preferredPackageManager } from './storage'
 import { popupLogger } from './utils'
 
 preferredPackageManager.get().then((res) => {
-  const packageChoiceEl: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="preferred-package-manager"]');
+  const packageChoiceEl: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="preferred-package-manager"]')
 
   if (packageChoiceEl.length === 0) {
     throw new Error('cannot find preferred package manager select element from popup script')
@@ -12,9 +12,9 @@ preferredPackageManager.get().then((res) => {
 
   packageChoiceEl.forEach((radioButton: HTMLInputElement) => {
     if (radioButton.value === res.preferredPackageManager) {
-      radioButton.checked = true;
+      radioButton.checked = true
     }
-  });
+  })
 
   packageChoiceEl.forEach((choice) => {
     choice.addEventListener('change', (e): void => {
