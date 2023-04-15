@@ -2,7 +2,7 @@ import { preferredPackageManager } from '@chrome/src/storage'
 import { popupLogger } from '@chrome/src/utils'
 
 import {
-  fireEvent, getAllByLabelText, getQueriesForElement, waitFor
+  fireEvent, getQueriesForElement, waitFor
 } from '@testing-library/dom'
 
 jest.mock('@chrome/src/storage')
