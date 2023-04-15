@@ -4,7 +4,7 @@ import { popupLogger } from './utils'
 preferredPackageManager.get().then((res) => {
   const packageChoiceEl: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="preferred-package-manager"]');
 
-  if (packageChoiceEl == null) {
+  if (packageChoiceEl.length === 0) {
     throw new Error('cannot find preferred package manager select element from popup script')
   }
 

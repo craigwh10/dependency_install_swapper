@@ -2,7 +2,7 @@ import { preferredPackageManager } from '@chrome/src/storage'
 import { popupLogger } from '@chrome/src/utils'
 
 import {
-  fireEvent, getQueriesForElement, waitFor
+  fireEvent, getAllByLabelText, getQueriesForElement, waitFor
 } from '@testing-library/dom'
 
 jest.mock('@chrome/src/storage')
@@ -30,23 +30,37 @@ describe('popup', () => {
         mockPreferredPackageManager.set.mockResolvedValue();
         mockPreferredPackageManager.get.mockResolvedValue({ preferredPackageManager: 'npm' })
         document.body.innerHTML = `
-                    <select name="preferred-package-manager">
-                    <option value="yarn">Yarn</option>
-                    <option value="npm">NPM</option>
-                    </select>
+        <div role="group" aria-label="select your preferred package manager">
+            <label>
+              <input type="radio" name="preferred-package-manager" value="yarn" required aria-describedby="select your preferred package manager as yarn" />
+              <span>Yarn</span>
+            </label>
+            <label>
+              <input type="radio" name="preferred-package-manager" value="npm" required aria-describedby="select your preferred package manager as npm" />
+              <span>NPM</span>
+            </label>
+            <label>
+              <input type="radio" name="preferred-package-manager" value="pnpm" required aria-describedby="select your preferred package manager as pnpm" />
+              <span>PNPM</span>
+            </label>
+            <label>
+              <input type="radio" name="preferred-package-manager" value="bower" required aria-describedby="select your preferred package manager as bower" />
+              <span>Bower</span>
+            </label>
+        </div>
                 `
 
         require('../../../src/popup')
       })
     })
     it('should call package manager setter & message query if select option changed to npm', async () => {
-      const { getByRole } = getQueriesForElement(document.body)
+      const { getByLabelText } = getQueriesForElement(document.body)
 
       fireEvent.change(
-        getByRole('combobox')!,
+        getByLabelText('NPM')!,
         {
           target: {
-            value: 'npm'
+            selected: true
           }
         }
       )
@@ -77,7 +91,7 @@ describe('popup', () => {
 
     it('should throw a warning to client', async () => {
       await waitFor(() => {
-        expect(mockPopupLoggger).toBeCalledWith('warn', 'cannot find preferred package manager select element from popup script')
+        expect(mockPopupLoggger).toHaveBeenLastCalledWith('warn', 'cannot find preferred package manager select element from popup script')
       })
     })
   })
