@@ -32,7 +32,16 @@ window.onload = function () {
       // URL changed
       prevUrl = activeUrl
       contentLogger('info', `url clock picked up url change to ${activeUrl} from ${prevUrl}`)
-      updateCommandFromStore(0, updateCopyToClipboardButton.fromPath)
+      if (activeUrl.includes('yarnpkg.com')) {
+        // to account for gradual loading
+        // worth being wary of
+        // https://www.nngroup.com/articles/response-times-3-important-limits/
+        updateCommandFromStore(1300, updateCopyToClipboardButton.fromPath)
+      }
+
+      if (activeUrl.includes('npmjs.com')) {
+        updateCommandFromStore(0, updateCopyToClipboardButton.fromPath)
+      }
     }
   }, 200)
 }

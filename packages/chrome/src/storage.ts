@@ -7,7 +7,7 @@ export const preferredPackageManager = {
     return await (chrome.storage.local.get(preferenceKey) as Promise<{ preferredPackageManager: availablePackageManagers }>)
   },
   /**
-     * @param val 'npm' | 'yarn'
+     * @param val either 'npm' | 'yarn' | 'bower' | 'pnpm'
      */
   set: async (val: string) => {
     await chrome.storage.local.set({

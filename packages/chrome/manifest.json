@@ -1,6 +1,6 @@
 {
     "name": "Dependency Install Swapper",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "manifest_version": 3,
     "description": "Swap npm, yarn, pnpm & bower install links interchangeably on npmjs and yarnpkg",
     "action": {

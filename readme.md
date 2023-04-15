@@ -50,6 +50,7 @@ Then once the `output` directory is generated:
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
 - For current active requirements see [scenarios.md](./docs/scenarios.md) (used for the manual tests due to beyond unit test issues)
+- "Safety nets not guardrails" for test coverage, coverage isn't enforced but we should produce valuable tests.
 
 ## Milestones
 
