@@ -18,7 +18,10 @@ describe('when a user is changing preferred package', () => {
 
     it('changes the install command to pnpm when pnpm selected', async () => {
         console.log("getting browser");
-        console.log("found browser", browser);;
+        console.log("found browser", browser);
+        const targets = await browser.targets();
+
+        console.log('targets found', targets);
         await setPnpmInitially(browser);
         console.log('set pnpm');
         await pnpmPreferenceOnNpm(browser)

@@ -4,7 +4,7 @@ import path from 'path';
 export const getBrowser = async () => {
     const pathToExtension = path.join(process.cwd(), 'output');
     console.log('env', process.env.CHROME_PATH);
-
+    console.log('nodeenv', process.env.NODE_ENV);
     return puppeteer.launch({
         headless: process.env.NODE_ENV === 'prod' ? 'new' : false,
         timeout: 120000,
