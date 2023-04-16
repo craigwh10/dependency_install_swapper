@@ -1,6 +1,5 @@
 import type { Browser as PupBrowser, Page } from 'puppeteer';
 
-// https://vivrichards.co.uk/automation/e2e-testing-chrome-extension-using-puppeteer
 export type Browser = PupBrowser;
 export class BasePage {
     protected page: Page | undefined;

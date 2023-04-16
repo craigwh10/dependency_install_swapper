@@ -2,9 +2,11 @@
 
 E2E tests are using page-object model, where features contain the tests using only the page objects.
 
+I probably would've been stuck for hours longer if it wasn't for this [tutorial](https://vivrichards.co.uk/automation/e2e-testing-chrome-extension-using-puppeteer)
+
 ## Yarnpkg dropdown
 
-Is a nightmare to grab in inspect element, but you can force it to state and then copy html.
+Is a nightmare to grab inside of inspect element, but you can force it to state and then copy HTML.
 
 ```html
 <ul aria-label="Search results" class="c06f4cad absolute bg-white ma0 pa0 z-2 pointer list" role="listbox" id="typeahead-list-1">
