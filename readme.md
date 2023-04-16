@@ -74,6 +74,7 @@ Then once the `output` directory is generated:
 
 - [x] Path aliases with parcel and tsc
 - [x] Linting (ts-standard)
+- [x] E2E Coverage via manual runs
 - [ ] Publishing with Semver and generating distribution zips
 - [ ] Automated compatibility coverage
   - [ ] Requires help, tried puppeteer, cypress & playwright without much success with regards to testing extensions on manifest v3 appropriately.

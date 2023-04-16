@@ -1,5 +1,7 @@
 # Reference
 
+E2E tests are using page-object model, where features contain the tests using only the page objects.
+
 ## Yarnpkg dropdown
 
 Is a nightmare to grab in inspect element, but you can force it to state and then copy html.
