@@ -49,7 +49,7 @@ Then once the `output` directory is generated:
 ### Notes
 
 - Using commit-lint standards for changelog generation, so use type(scope): msg.
-- For current active requirements see [scenarios.md](./docs/scenarios.md) (used for the manual tests due to beyond unit test issues)
+- For current active requirements see [scenarios.md](./docs/scenarios.md)
 - "Safety nets not guardrails" for test coverage, coverage isn't enforced but we should produce valuable tests.
 
 ## Milestones
@@ -76,5 +76,8 @@ Then once the `output` directory is generated:
 - [x] Linting (ts-standard)
 - [x] E2E Coverage via manual runs
 - [ ] Publishing with Semver and generating distribution zips
+- [ ] Pipelines including E2E run (needs help) 
 - [ ] Automated compatibility coverage
-  - [ ] Requires help, tried puppeteer, cypress & playwright without much success with regards to testing extensions on manifest v3 appropriately.
+  - [ ] Firefox
+  - [ ] Brave
+  - [ ] Edge
