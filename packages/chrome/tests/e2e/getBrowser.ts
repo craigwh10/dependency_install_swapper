@@ -12,7 +12,8 @@ export const getBrowser = async () => {
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
         // '--disable-features=DialMediaRouteProvider',
-        process.env.NODE_ENV === 'prod' ? '--no-sandbox' : ''
+        process.env.NODE_ENV === 'prod' ? '--no-sandbox' : '',
+        process.env.NODE_ENV === 'prod' ? '--disable-setuid-sandbox' : ''
         ],
         defaultViewport: {
             width: 1280,
