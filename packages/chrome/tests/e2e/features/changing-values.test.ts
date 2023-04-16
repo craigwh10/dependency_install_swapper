@@ -5,10 +5,11 @@ import { YarnPkgComPage } from "../page/YarnPkgComPage";
 
 describe('when a user is changing preferred package', () => {
     let browser: Browser;
+    let popup: PopupPage;
 
     beforeEach(async () => {
         browser = await getBrowser();
-        await setPnpmInitially(browser);
+        popup = await setPnpmInitially(browser);
     })
 
     afterEach(async () => {
@@ -35,18 +36,23 @@ describe('when a user is changing preferred package', () => {
         await pnpmPreferenceOnNpm(browser);
         await pnpmPreferenceOnYarn(browser);
     })
+
+    it('should change the preferrence appropriately on both sites if changed on popup', async () => {
+        const npmJsComPage = await pnpmPreferenceOnNpm(browser);
+        const yarnPkgComPage = await pnpmPreferenceOnYarn(browser);
+
+        await popup.switchToTab();
+        await popup.selectPreference('yarn');
+
+        await npmJsComPage.switchToTab();
+        await npmJsComPage.waitForCommandText('yarn add eslint');
+
+        await yarnPkgComPage.switchToTab();
+        await yarnPkgComPage.waitForCommandText('yarn add eslint');
+    })
 })
 
-export const setPnpmInitially = async (browser: Browser) => {
-    const popupPage = new PopupPage(browser);
-
-    await popupPage.openPopupAsNewTab();
-    await popupPage.selectPreference('pnpm');
-
-    return popupPage;
-}
-
-export const pnpmPreferenceOnNpm = async (browser: Browser) => {
+const pnpmPreferenceOnNpm = async (browser: Browser) => {
     const npmJsComPage = new NpmJsComPage(browser);
 
     await npmJsComPage.openPackageAsNewTab('eslint');
@@ -55,7 +61,16 @@ export const pnpmPreferenceOnNpm = async (browser: Browser) => {
     return npmJsComPage;
 }
 
-export const pnpmPreferenceOnYarn = async (browser: Browser) => {
+async function setPnpmInitially (browser: Browser) {
+    const popupPage = new PopupPage(browser);
+
+    await popupPage.openPopupAsNewTab();
+    await popupPage.selectPreference('pnpm');
+
+    return popupPage;
+}
+
+const pnpmPreferenceOnYarn = async (browser: Browser) => {
     const yarnPkgComPage = new YarnPkgComPage(browser);
 
     await yarnPkgComPage.openPackageAsNewTab('eslint');

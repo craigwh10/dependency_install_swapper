@@ -17,4 +17,18 @@ export class NpmJsComPage extends BasePage {
             text
         )
     }
+
+    public async clickAndTypePackageNameOnSearch (packageName: string) {
+        const selector = 'form[id="search"] input[type="search"]';
+        await this.page!.waitForSelector(selector);
+
+        await this.page?.type(selector, packageName);
+    }
+
+    public async clickPackageOption (packageName: string) {
+        const selector = `form[id="search"] ul > li[aria-label="${packageName}"]`;
+        await this.page!.waitForSelector(selector);
+
+        await this.page?.click(selector)
+    }
 }
