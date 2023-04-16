@@ -7,6 +7,7 @@ export const getBrowser = async () => {
 
     return puppeteer.launch({
         headless: false,
+        timeout: 90000,
         args: [
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
