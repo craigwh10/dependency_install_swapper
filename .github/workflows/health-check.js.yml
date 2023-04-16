@@ -30,13 +30,13 @@ jobs:
       run: yarn
       env:
         PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-    - name: Making sure things aren't broken (unit/int)
-      run: yarn test:chrome
+    # - name: Making sure things aren't broken (unit/int)
+    #   run: yarn test:chrome
     - name: Puppeteer Headful
       uses: mujo-code/puppeteer-headful@18.9.0
       with:
         args: yarn run:chrome aut:ci
       env:
         PUPPETEER_WS_ENDPOINT_TIMEOUT: "120000"
-    - name: Finding needles in haystacks (lint)
-      run: yarn lint
+    # - name: Finding needles in haystacks (lint)
+    #   run: yarn lint

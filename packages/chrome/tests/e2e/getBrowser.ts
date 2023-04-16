@@ -10,7 +10,7 @@ export const getBrowser = async () => {
         args: [
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
-        '--disable-features=DialMediaRouteProvider',
+        // '--disable-features=DialMediaRouteProvider',
         process.env.NODE_ENV === 'prod' ? '--no-sandbox' : ''
         ],
         executablePath: process.env.NODE_ENV === 'prod' ? process.env.PUPPETEER_EXEC_PATH : undefined,
