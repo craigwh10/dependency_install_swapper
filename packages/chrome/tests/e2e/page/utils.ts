@@ -1,8 +1,8 @@
 import type { Page } from 'puppeteer';
 
-export const waitForElementToContainText = async (page: Page, selector: string, text: string) => {
+export const waitForElementToContainText = async (selector: string, text: string, page?: Page) => {
     try {
-        await page.waitForFunction(
+        await page?.waitForFunction(
             ({text, selector}) => {
               const element = document.querySelector(selector);
               return element && element.textContent?.includes(text);

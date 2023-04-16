@@ -8,32 +8,32 @@ export class YarnPkgComPage extends BasePage {
 
     public async openPackageAsNewTab (packageName: string) {
         await this.openPageAsNewTab();
-        await this.page!.goto(`https://yarnpkg.com/package/${packageName}`);
+        await this.page?.goto(`https://yarnpkg.com/package/${packageName}`);
     }
 
     public async waitForCommandText (text: string) {
         await waitForElementToContainText(
-            this.page!,
             'section > code > span',
-            text
+            text,
+            this.page
         )
     }
 
     public async clickAndTypePackageNameOnSearch (packageName: string) {
         const selector = 'form input[type="search"]';
-        await this.page!.waitForSelector(selector);
+        await this.page?.waitForSelector(selector);
 
         await this.page?.type(selector, packageName);
     }
 
     public async clickPackageOptionFromPage (packageName: string) {
         const selector = `a[href="/package/${packageName}"]`;
-        await this.page!.waitForSelector(selector);
+        await this.page?.waitForSelector(selector);
 
         await this.page?.click(selector)
     }
 
     public async hitEnter () {
-        await this.page!.keyboard.press('Enter');
+        await this.page?.keyboard.press('Enter');
     }
 }

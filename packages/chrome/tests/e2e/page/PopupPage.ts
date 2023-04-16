@@ -14,11 +14,11 @@ export class PopupPage extends BasePage {
     
         const extensionUrl = `chrome-extension://${extensionId}/popup.html`;
     
-        await this.page!.goto(extensionUrl, {waitUntil: ['domcontentloaded', "networkidle2"]});
+        await this.page?.goto(extensionUrl, {waitUntil: ['domcontentloaded', "networkidle2"]});
     }
 
     public async selectPreference (choice: availablePackageManagers) {
-        await this.page!.waitForSelector(`input[value="${choice}"]`);
-        await this.page!.click(`input[value="${choice}"]`);
+        await this.page?.waitForSelector(`input[value="${choice}"]`);
+        await this.page?.click(`input[value="${choice}"]`);
     }
 }

@@ -14,10 +14,10 @@ export class BasePage {
     }
 
     public async switchToTab () {
-        await this.page!.bringToFront();
+        await this.page?.bringToFront();
     }
 
     public async close () {
-        await this.page!.close();
+        await this.page?.close();
     }
 }
