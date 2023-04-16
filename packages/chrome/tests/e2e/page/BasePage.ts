@@ -15,6 +15,7 @@ export class BasePage {
             width: 1400,
             height: 800
         })
+        await new Promise(r => setTimeout(r, 10000));
     }
 
     public async switchToTab () {
