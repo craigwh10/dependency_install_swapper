@@ -28,6 +28,8 @@ jobs:
         cache: 'npm'
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v1.2.0
+      with:
+        chrome-version: stable
     # - name: Chrome deps
     - name: Installing dependencies
       run: yarn
