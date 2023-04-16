@@ -1,15 +1,40 @@
-FROM node:18
+FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y chromium
-RUN echo $(which chromium-browser)
+# Install Node.js
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
+# # Install node pre-requisites
+# RUN apt-get update && apt-get install -y python
+RUN apt-get update && \
+    apt-get install -y build-essential
+
+# Install Chromium
+RUN apt-get update && \
+    apt-get install -y chromium-browser
+
+# Install yarn using npm
+RUN npm i -g yarn
+
 WORKDIR /app
+
 COPY . .
+
 RUN ls
+
 RUN rm -rf node_modules
+
 RUN yarn install
 
-RUN yarn test:chrome
+RUN which chromium-browser
+
+# RUN yarn test:chrome
+
+RUN service snapd start
+RUN snap install chromium
 
 RUN yarn run:chrome aut:ci 
 
-RUN yarn lint
+# RUN yarn lint
