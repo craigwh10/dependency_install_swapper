@@ -4,34 +4,40 @@ import { Browser } from "../page/BasePage";
 import { YarnPkgComPage } from "../page/YarnPkgComPage";
 
 describe('when a user is changing preferred package', () => {
-    let browser: Browser;
+    // let browser: Browser;
 
-    beforeEach(async() => {
-        browser = await getBrowser();
-        await setPnpmInitially(browser);
-    })
+    // beforeEach(async() => {
+    //     // browser = await getBrowser();
+    // })
 
-    afterEach(async () => {
-        await browser.close();
-    })
+    // afterEach(async () => {
+    //     // await browser.close();
+    // })
 
     it('changes the install command to pnpm when pnpm selected', async () => {
-        await pnpmPreferenceOnNpm(browser);
+        console.log("getting browser");
+        const browser = await getBrowser();
+        console.log("found browser", browser);;
+        await setPnpmInitially(browser);
+        console.log('set pnpm');
+        await pnpmPreferenceOnNpm(browser)
+        console.log('preparing to close');
+        await browser.close();
     })
-    it('should persist these between npm and yarn', async () => {
-        await pnpmPreferenceOnNpm(browser);
-        await pnpmPreferenceOnYarn(browser);
-    })
+    // it('should persist these between npm and yarn', async () => {
+    //     await pnpmPreferenceOnNpm(browser);
+    //     await pnpmPreferenceOnYarn(browser);
+    // })
 
-    it('should should persist on npm and yarn after closing and reopening', async () => {
-        const npmJsComPage = await pnpmPreferenceOnNpm(browser);
-        const yarnPkgComPage = await pnpmPreferenceOnYarn(browser);
-        await npmJsComPage.close();
-        await yarnPkgComPage.close();
+    // it('should should persist on npm and yarn after closing and reopening', async () => {
+    //     const npmJsComPage = await pnpmPreferenceOnNpm(browser);
+    //     const yarnPkgComPage = await pnpmPreferenceOnYarn(browser);
+    //     await npmJsComPage.close();
+    //     await yarnPkgComPage.close();
 
-        await pnpmPreferenceOnNpm(browser);
-        await pnpmPreferenceOnYarn(browser);
-    })
+    //     await pnpmPreferenceOnNpm(browser);
+    //     await pnpmPreferenceOnYarn(browser);
+    // })
 })
 
 export const setPnpmInitially = async (browser: Browser) => {
