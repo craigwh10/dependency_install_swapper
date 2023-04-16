@@ -17,7 +17,11 @@ export class BasePage {
         })
     }
 
-    protected async switchToTab () {
+    public async switchToTab () {
         await this.page!.bringToFront();
+    }
+
+    public async close () {
+        await this.page!.close();
     }
 }
