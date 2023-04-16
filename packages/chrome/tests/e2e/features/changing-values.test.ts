@@ -4,25 +4,26 @@ import { Browser } from "../page/BasePage";
 import { YarnPkgComPage } from "../page/YarnPkgComPage";
 
 describe('when a user is changing preferred package', () => {
-    // let browser: Browser;
+    let browser: Browser;
 
-    // beforeEach(async() => {
-    //     // browser = await getBrowser();
-    // })
+    beforeAll(async () => {
+        browser = await getBrowser();
+    })
 
-    // afterEach(async () => {
-    //     // await browser.close();
-    // })
+    afterAll(async () => {
+        if (browser) {
+            await browser.close();
+        }
+    })
 
     it('changes the install command to pnpm when pnpm selected', async () => {
         console.log("getting browser");
-        const browser = await getBrowser();
         console.log("found browser", browser);;
         await setPnpmInitially(browser);
         console.log('set pnpm');
         await pnpmPreferenceOnNpm(browser)
         console.log('preparing to close');
-        await browser.close();
+        // close pages.
     })
     // it('should persist these between npm and yarn', async () => {
     //     await pnpmPreferenceOnNpm(browser);

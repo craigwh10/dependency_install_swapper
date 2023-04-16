@@ -7,13 +7,18 @@ export const getBrowser = async () => {
 
     return puppeteer.launch({
         headless: false,
-        timeout: 200000,
+        timeout: 120000,
         args: [
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,
         // '--disable-features=DialMediaRouteProvider',
         process.env.NODE_ENV === 'prod' ? '--no-sandbox' : ''
         ],
+        defaultViewport: {
+            width: 1280,
+            height: 800,
+          },
+        slowMo: 100,
         executablePath: process.env.NODE_ENV === 'prod' ? process.env.PUPPETEER_EXEC_PATH : undefined,
     });
 }
