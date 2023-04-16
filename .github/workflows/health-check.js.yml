@@ -33,7 +33,7 @@ jobs:
     - name: Making sure things aren't broken (unit/int)
       run: yarn test:chrome
     - name: Making sure things definitely aren't broken (e2e) 
-      run: CHROME_ENV=$(which chrome) yarn run:chrome aut:ci
+      run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
       timeout-minutes: 5
       shell: bash
       continue-on-error: true
