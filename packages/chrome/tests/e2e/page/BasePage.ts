@@ -11,11 +11,6 @@ export class BasePage {
 
     protected async openPageAsNewTab () {
         this.page = await this.browser.newPage();
-        await this.page.setViewport({
-            width: 1400,
-            height: 800
-        })
-        await new Promise(r => setTimeout(r, 10000));
     }
 
     public async switchToTab () {
