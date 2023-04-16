@@ -21,8 +21,8 @@ const testCase = async (url: string) => {
         const { loadTime: withNoExtension, browser: withNoExtensionBrowser } = await runPerfTest(true, url);
         noExtRes = withNoExtension;
         await withNoExtensionBrowser.close();
-    } catch ({ browser, err}: any) {
-        await browser?.close();
+    } catch (err: any) {
+        await err.browser?.close();
         throw new Error(err);
     }
 
@@ -30,8 +30,8 @@ const testCase = async (url: string) => {
         const { loadTime: withExtension, browser: withExtensionBrowser } = await runPerfTest(false, url);
         extRes = withExtension;
         await withExtensionBrowser.close()
-    } catch ({ browser, err}: any) {
-        await browser?.close();
+    } catch (err: any) {
+        await err.browser?.close();
         throw new Error(err);
     }
 
@@ -63,7 +63,7 @@ const runPerfTest = async (withNoExtension: boolean, url: string) => {
 
         return {loadTime, browser};
     } catch (err) {
-        throw { browser, err };
+        throw new PerfTestError('runPerfTest error', {browser});
     }
 }
 
@@ -74,4 +74,14 @@ export const setPnpmInitially = async (browser: Browser) => {
     await popupPage.selectPreference('pnpm');
 
     return popupPage;
+}
+
+class PerfTestError extends Error {
+    data: { browser: Browser | null }
+    constructor(message: string, data: { browser: Browser | null }) {
+      super(message);
+      this.data = data;
+      this.name = this.constructor.name;
+      Error.captureStackTrace(this, this.constructor);
+    }
 }
