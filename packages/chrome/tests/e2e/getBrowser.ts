@@ -14,6 +14,6 @@ export const getBrowser = async () => {
         '--window-size=5000x800',
         process.env.NODE_ENV === 'prod' ? '--no-sandbox' : ''
         ],
-        executablePath: process.env.NODE_ENV === 'prod' ? '/usr/bin/chromium-browser' : undefined
+        executablePath: process.env.NODE_ENV === 'prod' ? '/usr/bin/chromium' : undefined
     });
 }

@@ -1,0 +1,15 @@
+FROM node:18
+
+RUN apt-get update && apt-get install -y chromium
+RUN echo $(which chromium-browser)
+WORKDIR /app
+COPY . .
+RUN ls
+RUN rm -rf node_modules
+RUN yarn install
+
+RUN yarn test:chrome
+
+RUN yarn run:chrome aut:ci 
+
+RUN yarn lint
