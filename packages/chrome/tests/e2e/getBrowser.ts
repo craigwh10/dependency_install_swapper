@@ -15,7 +15,9 @@ export const getBrowser = async () => {
         process.env.NODE_ENV === 'prod' ? '--enable-features=NetworkService' : '',
         ''
         ],
+        // Do not set viewports, messes with selectors.
         defaultViewport: null,
+        // Comes from action on creating chrome binary
         executablePath: process.env.CHROME_PATH,
     });
 }
