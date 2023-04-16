@@ -5,7 +5,7 @@ export const getBrowser = async () => {
     const pathToExtension = path.join(process.cwd(), 'output');
 
     return puppeteer.launch({
-        headless: false,
+        headless: process.env.NODE_ENV === "test" ? 'new' : false,
         args: [
         `--disable-extensions-except=${pathToExtension}`,
         `--load-extension=${pathToExtension}`,

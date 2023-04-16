@@ -28,4 +28,5 @@ jobs:
         cache: 'npm'
     - run: yarn
     - run: yarn test:chrome
+    - run: yarn run:chrome aut:ci
     - run: yarn lint
