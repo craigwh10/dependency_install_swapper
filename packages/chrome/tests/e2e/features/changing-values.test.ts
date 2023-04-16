@@ -21,6 +21,10 @@ describe('when a user is changing preferred package', () => {
         console.log("found browser", browser);
         const targets = await browser.targets();
 
+        for (const target of targets) {
+            console.log('type', target.type());
+          }
+
         console.log('targets found', targets);
         await setPnpmInitially(browser);
         console.log('set pnpm');
