@@ -26,15 +26,21 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Setup Chrome
-      uses: browser-actions/setup-chrome@v1.2.0
+    # - name: Setup Chrome
+    #   uses: browser-actions/setup-chrome@v1.2.0
     - name: Installing dependencies
       run: yarn
+      env:
+        PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
     - name: Making sure things aren't broken (unit/int)
       run: yarn test:chrome
-    - name: Making sure things definitely aren't broken (e2e)
-      env:
-        CHROME_PATH: $(which chrome)
-      run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
+    - name: Puppeteer Headful
+      uses: mujo-code/puppeteer-headful@18.9.0
+      with:
+        args: yarn run:chrome aut:ci
+    # - name: Making sure things definitely aren't broken (e2e)
+    #   env:
+    #     CHROME_PATH: $(which chrome)
+    #   run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
     - name: Finding needles in haystacks (lint)
       run: yarn lint
