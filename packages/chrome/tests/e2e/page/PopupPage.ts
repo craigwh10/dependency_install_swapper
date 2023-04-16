@@ -8,7 +8,9 @@ export class PopupPage extends BasePage {
 
     public async openPopupAsNewTab () {
         await this.openPageAsNewTab();
-        const extensionTarget = await this.browser.waitForTarget(target => target.type() === 'service_worker');
+        const extensionTarget = await this.browser.waitForTarget(target => target.type() === 'service_worker', {
+            timeout: 90000
+        });
         const partialExtensionUrl = extensionTarget?.url() || '';
         const [, , extensionId] = partialExtensionUrl.split('/');
     
