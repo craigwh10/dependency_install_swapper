@@ -33,15 +33,17 @@ jobs:
     - name: Making sure things aren't broken (unit/int)
       run: yarn test:chrome
     - name: Making sure things definitely aren't broken (e2e) 
-      run: yarn run:chrome aut:ci
-      shell: bash
-      continue-on-error: true
-      # Run in the background so that we can continue with the next step
-      # Log the CPU and memory usage every 5 seconds
-      # Adjust the interval and duration as needed
-      # The output is appended to a file for later analysis
-      post: |
+      run: |
+        yarn run:chrome aut:ci
+        # Run in the background so that we can continue with the next step
+        background: true
+        # Log the CPU and memory usage every 5 seconds
+        # Adjust the interval and duration as needed
+        # The output is appended to a file for later analysis
         date >> system_resources.log
         top -b -d 5 -n 100 >> system_resources.log
+      timeout: 5m
+      shell: bash
+      continue-on-error: true
     - name: Finding needles in haystacks (lint)
       run: yarn lint
