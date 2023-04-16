@@ -9,7 +9,7 @@
     "build:common": "parcel build src/background/index.ts src/content/index.ts popup.html --public-url=./ --no-source-maps && cp manifest.json output/manifest.json && cp -r assets output/assets",
     "test": "jest --config=./jest.config.js tests/integration tests/unit",
     "aut": "jest --config=./tests/e2e/jest.config.js tests/e2e",
-    "aut:ci": "NODE_ENV=prod yarn aut"
+    "aut:ci": "NODE_ENV=prod yarn aut --runInBand"
   },
   "targets": {
     "default": {

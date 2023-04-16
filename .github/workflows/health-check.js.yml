@@ -26,8 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    # - name: Setup Chrome
-    #   uses: browser-actions/setup-chrome@v1.2.0
     - name: Installing dependencies
       run: yarn
       env:
@@ -38,9 +36,7 @@ jobs:
       uses: mujo-code/puppeteer-headful@18.9.0
       with:
         args: yarn run:chrome aut:ci
-    # - name: Making sure things definitely aren't broken (e2e)
-    #   env:
-    #     CHROME_PATH: $(which chrome)
-    #   run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
+      env:
+        PUPPETEER_WS_ENDPOINT_TIMEOUT: "120000"
     - name: Finding needles in haystacks (lint)
       run: yarn lint
