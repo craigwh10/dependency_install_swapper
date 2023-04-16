@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import path from 'path';
 
-export const getBrowser = async (withNoExtension: boolean = false) => {
+export const getBrowser = async (withNoExtension: boolean = false, slowDown?: number) => {
     const pathToExtension = path.join(process.cwd(), 'output');
 
     const extensionFlag = withNoExtension ? [] : [
@@ -12,6 +12,7 @@ export const getBrowser = async (withNoExtension: boolean = false) => {
     return puppeteer.launch({
         headless: process.env.NODE_ENV === 'prod' ? 'new' : false,
         timeout: 12000,
+        slowMo: slowDown, 
         args: [
         ...extensionFlag,
         process.env.NODE_ENV === 'prod' ? '--no-sandbox' : '',

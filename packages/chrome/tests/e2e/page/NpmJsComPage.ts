@@ -31,4 +31,12 @@ export class NpmJsComPage extends BasePage {
 
         await this.page?.click(selector)
     }
+
+    public async getWarningVisibility (waitInMs: number = 2000) {
+        await new Promise(r => setTimeout(r, waitInMs));
+        return Promise.race([
+            this.page?.evaluate(() => document.querySelector('#dis-google-ext-warning') !== null),
+            new Promise(resolve => setTimeout(() => resolve(false), 200))
+        ]);
+    }
 }

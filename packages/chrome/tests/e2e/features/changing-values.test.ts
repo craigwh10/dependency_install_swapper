@@ -2,6 +2,7 @@ import { getBrowser } from "../getBrowser"
 import { PopupPage, NpmJsComPage } from "../page";
 import { Browser } from "../page/BasePage";
 import { YarnPkgComPage } from "../page/YarnPkgComPage";
+import { setPreferenceInitially } from "../steps/popup/setPreferenceInitially";
 
 describe('when a user is changing preferred package', () => {
     let browser: Browser;
@@ -9,7 +10,7 @@ describe('when a user is changing preferred package', () => {
 
     beforeEach(async () => {
         browser = await getBrowser();
-        popup = await setPnpmInitially(browser);
+        popup = await setPreferenceInitially(browser, 'pnpm');
     })
 
     afterEach(async () => {
@@ -59,15 +60,6 @@ const pnpmPreferenceOnNpm = async (browser: Browser) => {
     await npmJsComPage.waitForCommandText('pnpm add eslint');
 
     return npmJsComPage;
-}
-
-async function setPnpmInitially (browser: Browser) {
-    const popupPage = new PopupPage(browser);
-
-    await popupPage.openPopupAsNewTab();
-    await popupPage.selectPreference('pnpm');
-
-    return popupPage;
 }
 
 const pnpmPreferenceOnYarn = async (browser: Browser) => {

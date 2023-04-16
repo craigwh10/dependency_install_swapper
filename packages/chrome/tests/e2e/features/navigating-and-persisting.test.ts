@@ -1,14 +1,15 @@
 import { getBrowser } from "../getBrowser"
-import { PopupPage, NpmJsComPage } from "../page";
+import {  NpmJsComPage } from "../page";
 import { Browser } from "../page/BasePage";
 import { YarnPkgComPage } from "../page/YarnPkgComPage";
+import { setPreferenceInitially } from "../steps/popup/setPreferenceInitially";
 
 describe('when a user is changing preferred package', () => {
     let browser: Browser
 
     beforeEach(async () => {
         browser = await getBrowser()
-        await setPnpmInitially(browser)
+        await setPreferenceInitially(browser, 'pnpm')
     })
 
     afterEach(async () => {
@@ -58,14 +59,7 @@ const pnpmPreferenceOnNpm = async (browser: Browser) => {
     return npmJsComPage;
 }
 
-async function setPnpmInitially (browser: Browser) {
-    const popupPage = new PopupPage(browser);
 
-    await popupPage.openPopupAsNewTab();
-    await popupPage.selectPreference('pnpm');
-
-    return popupPage;
-}
 
 const pnpmPreferenceOnYarn = async (browser: Browser) => {
     const yarnPkgComPage = new YarnPkgComPage(browser);

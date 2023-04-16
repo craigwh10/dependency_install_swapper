@@ -36,4 +36,11 @@ export class YarnPkgComPage extends BasePage {
     public async hitEnter () {
         await this.page?.keyboard.press('Enter');
     }
+
+    public async getWarningVisibility (timeoutInMS: number = 2000) {
+        return Promise.race([
+            this.page?.evaluate(() => document.querySelector('#dis-google-ext-warning') !== null),
+            new Promise(resolve => setTimeout(() => resolve(false), timeoutInMS))
+        ]);
+    }
 }

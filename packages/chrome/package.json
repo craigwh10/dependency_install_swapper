@@ -10,7 +10,8 @@
     "test": "jest --config=./jest.config.js tests/integration tests/unit",
     "aut": "jest --config=./tests/e2e/jest.config.js tests/e2e",
     "perf": "jest --config=./tests/performance/jest.config.js tests/performance",
-    "aut:ci": "NODE_ENV=prod yarn aut --runInBand"
+    "aut:ci": "NODE_ENV=prod yarn aut --runInBand",
+    "e2e:glob": "jest --config=./tests/e2e/jest.config.js"
   },
   "targets": {
     "default": {
