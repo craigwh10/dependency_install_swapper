@@ -13,13 +13,16 @@ export const getBrowser = async () => {
         `--load-extension=${pathToExtension}`,
         // '--disable-features=DialMediaRouteProvider',
         process.env.NODE_ENV === 'prod' ? '--no-sandbox' : '',
-        process.env.NODE_ENV === 'prod' ? '--disable-setuid-sandbox' : ''
+        process.env.NODE_ENV === 'prod' ? '--disable-setuid-sandbox' : '',
+        '--enable-features=NetworkService',
+        ''
         ],
         defaultViewport: {
             width: 1280,
             height: 800,
           },
         slowMo: 100,
+        ignoreHTTPSErrors: true,
         executablePath: process.env.NODE_ENV === 'prod' ? process.env.CHROME_PATH : undefined,
     });
 }
