@@ -32,10 +32,9 @@ jobs:
       run: yarn
     - name: Making sure things aren't broken (unit/int)
       run: yarn test:chrome
-    - name: Making sure things definitely aren't broken (e2e) 
+    - name: Making sure things definitely aren't broken (e2e)
+      env:
+        CHROME_PATH: $(which chrome)
       run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
-      timeout-minutes: 5
-      shell: bash
-      continue-on-error: true
     - name: Finding needles in haystacks (lint)
       run: yarn lint

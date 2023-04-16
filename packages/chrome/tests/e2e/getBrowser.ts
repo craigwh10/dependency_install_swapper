@@ -5,6 +5,7 @@ export const getBrowser = async () => {
     const pathToExtension = path.join(process.cwd(), 'output');
     // const chromePath = path.join(__dirname, 'chrome.app');
 
+    console.log('env', process.env.CHROME_PATH);
     return puppeteer.launch({
         headless: process.env.NODE_ENV === "prod" ? 'new' : false,
         args: [
