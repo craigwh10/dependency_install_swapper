@@ -12,6 +12,6 @@ export const getBrowser = async () => {
         '--disable-features=DialMediaRouteProvider',
         '--window-size=5000x800'
         ],
-        executablePath: process.env.NODE_ENV === 'prod' ?  "/usr/bin/chromium-browser" : undefined
+        executablePath: process.env.NODE_ENV === 'prod' ?  "./chrome" : undefined
     });
 }
