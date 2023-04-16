@@ -42,7 +42,7 @@ jobs:
         # The output is appended to a file for later analysis
         date >> system_resources.log
         top -b -d 5 -n 100 >> system_resources.log
-      timeout-minutes: 5m
+      timeout-minutes: 5
       shell: bash
       continue-on-error: true
     - name: Finding needles in haystacks (lint)
