@@ -6,7 +6,7 @@ export const getBrowser = async () => {
     console.log('env', process.env.CHROME_PATH);
 
     return puppeteer.launch({
-        headless: false,
+        headless: process.env.NODE_ENV === 'prod' ? 'new' : false,
         timeout: 120000,
         args: [
         `--disable-extensions-except=${pathToExtension}`,

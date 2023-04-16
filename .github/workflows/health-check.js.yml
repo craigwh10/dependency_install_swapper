@@ -28,6 +28,7 @@ jobs:
         cache: 'npm'
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v1.2.0
+    # - name: Chrome deps
     - name: Installing dependencies
       run: yarn
     - name: Making sure things aren't broken (unit/int)
