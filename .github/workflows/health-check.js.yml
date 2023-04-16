@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install Chromium
-      run: sudo apt-get update && sudo apt-get install -y chromium-browser
+      run: apt-get update && apt-get install -y chromium-browser
     - name: Installing dependencies
       run: yarn
     - name: Making sure things aren't broken (unit/int)
