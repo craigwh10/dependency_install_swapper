@@ -2,6 +2,13 @@
 
 Lightweight google chrome extension which changes the install field in npmjs.com or yarnpkg.com to your preferred package manager.
 
+<a href="https://www.producthunt.com/posts/dependency-install-swapper?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-dependency&#0045;install&#0045;swapper" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=390366&theme=light" alt="Dependency&#0032;Install&#0032;Swapper - Effortlessly&#0032;swap&#0032;package&#0032;managers&#0032;on&#0032;npmjs&#0032;&#0038;&#0032;yarnpkg&#0032;sites&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/nkdhfndldlapnnbdijmnbmhecaklibno.svg?label=Chrome%20Web%20Store)](https://chrome.google.com/webstore/detail/dependency-install-swappe/nkdhfndldlapnnbdijmnbmhecaklibno)
+
+
+
+
 [![TS-Standard - TypeScript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard)
 [![Security by Snyk](https://img.shields.io/badge/Security%20by-Snyk-orange.svg?logo=snyk)](https://snyk.io/test/github/craigwh10/dependency_install_swapper)
 [![Canny](https://img.shields.io/badge/Canny-Suggestions-brightgreen.svg?style=flat-square&logo=canny)](https://dependency-install-swapper.canny.io/feature-requests)
