@@ -86,6 +86,14 @@ function handleReplaceTextFromPath (cmdPrefix: string): void {
   const containsDevDependency = hasInstallCommandInReadme(packageFromPath, true)
   const containsRegularDependency = hasInstallCommandInReadme(packageFromPath, false)
   const possiblyDevDependency = !containsDevDependency && !containsRegularDependency
+  const isBower = cmdPrefix === 'bower install';
+
+  if (isBower) {
+    if (warning !== null) {
+      contentLogger('info', 'warning found from prior transform, removing potential dev dep warning from ui')
+      warning.remove()
+    }
+  }
 
   if (containsDevDependency) {
     el.textContent = `${cmdPrefix} -D ${packageFromPath}`
@@ -94,7 +102,7 @@ function handleReplaceTextFromPath (cmdPrefix: string): void {
 
   el.textContent = `${cmdPrefix} ${packageFromPath}`
 
-  if (possiblyDevDependency && (warning === null)) {
+  if (possiblyDevDependency && (warning === null) && !isBower) {
     handleWarningMessage()
   }
 }
