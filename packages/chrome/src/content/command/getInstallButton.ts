@@ -9,7 +9,7 @@ type splitElReturn = [
 ]
 
 interface GetInstallButton {
-  site: 'yarn' | 'npm'
+  site: 'npm'
   installButton: {
     el: Element
     elText: string
@@ -20,20 +20,11 @@ interface GetInstallButton {
 export const getInstallButton = (): GetInstallButton => {
   const webUrl = window.location.href
 
-  if (webUrl.includes('yarnpkg.com')) {
-    return {
-      site: 'yarn',
-      installButton: validateInstallButtonExistence(
-        document.querySelector('section > code > span')
-      )
-    }
-  }
-
   if (webUrl.includes('npmjs.com')) {
     return {
       site: 'npm',
       installButton: validateInstallButtonExistence(
-        document.querySelector('span[role="button"]')
+        document.querySelector('button[aria-label="Copy install command line"]')?.previousElementSibling // you can only traverse downwards in HTML
       )
     }
   }
@@ -47,8 +38,8 @@ interface ValidateInstallButtonReturn {
   splitElText: splitElReturn
 }
 
-function validateInstallButtonExistence (installButton: Element | null): ValidateInstallButtonReturn {
-  if (installButton === null) {
+function validateInstallButtonExistence (installButton: Element | null | undefined): ValidateInstallButtonReturn {
+  if (installButton === null || installButton == undefined) {
     contentLogger('warn', 'no installation button found on page')
     throw new Error('content script could not find the install command on page')
   }

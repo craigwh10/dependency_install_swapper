@@ -12,7 +12,7 @@ export function checkReadmeContainsCommand (readmePreText: string, packageOfInte
   // using flat map over .map().filter((val) => val !== undefined)
   // a more type safe approach.
   const packageManagerIndices = stringArray.flatMap((text, idx) => (
-    ['npm', 'bower', 'yarn', 'pnpm'].includes(text) ? [idx] : [])
+    ['npm', 'bower', 'pnpm'].includes(text) ? [idx] : [])
   )
 
   const packageFound = packageManagerIndices.some((idx) => {

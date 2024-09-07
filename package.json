@@ -8,6 +8,7 @@
     "add:chrome": "yarn workspace chrome add",
     "run:chrome": "yarn workspace chrome run",
     "test:chrome": "yarn workspace chrome test",
+    "build:chrome": "yarn workspace chrome build:prod",
     "lint": "ts-standard",
     "lint:fix": "ts-standard --fix"
   },
