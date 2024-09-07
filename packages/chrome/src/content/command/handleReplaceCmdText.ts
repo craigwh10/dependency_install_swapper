@@ -16,11 +16,11 @@ function handleReplaceTextFromClipboard (cmdPrefix: string, packageNameOrDevDep:
   contentLogger('info', 'trying to replace text for npm readme')
 
   /**
-         * @note
-         * Bower does not have dev dependencies.
-         * --
-         * Hence the logic here.
-         */
+   * @note
+   * Bower does not have dev dependencies.
+   * --
+   * Hence the logic here.
+   */
   if (cmdPrefix === 'bower install') {
     if (warning !== null) {
       contentLogger('info', 'warning found from prior transform, removing potential dev dep warning from ui')
