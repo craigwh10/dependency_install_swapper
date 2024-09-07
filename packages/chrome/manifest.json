@@ -1,8 +1,8 @@
 {
     "name": "Dependency Install Swapper",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "manifest_version": 3,
-    "description": "Swap npm, yarn, pnpm & bower install links interchangeably on npmjs and yarnpkg",
+    "description": "Swap npm, yarn, pnpm & bower install links interchangeably on npmjs website",
     "action": {
         "default_title": "Dependency Install Swapper",
         "default_popup": "popup.html"
@@ -21,8 +21,7 @@
         {
           "js": ["src/content/index.js"],
           "matches": [
-            "https://www.npmjs.com/package/*",
-            "https://yarnpkg.com/package/*"
+            "https://www.npmjs.com/package/*"
           ]
         }
       ],
