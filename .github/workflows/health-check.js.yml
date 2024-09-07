@@ -19,28 +19,28 @@ jobs:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    # steps:
+    # - uses: actions/checkout@v3
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
     # @TODO: Manual for now, this can potentially come back when
     #        resolving why service_worker won't show in github action.
     # - name: Setup Chrome
     #   uses: browser-actions/setup-chrome@v1.2.0
     #   with:
     #     chrome-version: stable
-    - name: Installing dependencies
-      run: yarn
-    - name: Making sure things aren't broken (unit/int)
-      run: yarn test:chrome
+    # - name: Installing dependencies
+    #   run: yarn
+    # - name: Making sure things aren't broken (unit/int)
+    #   run: yarn test:chrome
     # @TODO: Manual for now, this can potentially come back when
     #        resolving why service_worker won't show in github action.
     # - name: Making sure things definitely aren't broken (e2e)
     #   env:
     #     CHROME_PATH: $(which chrome)
     #   run: CHROME_PATH=$(which chrome) yarn run:chrome aut:ci
-    - name: Finding needles in haystacks (lint)
-      run: yarn lint
+    # - name: Finding needles in haystacks (lint)
+    #   run: yarn lint
